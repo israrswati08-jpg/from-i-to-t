@@ -145,6 +145,12 @@ p{line-height:1.7}
 /* responsive */
 @media(max-width:500px){
   .page{padding:64px 14px 35px}
+  .page-back{
+    top:12px;
+    left:12px;
+    padding:9px 13px;
+    font-size:.72rem;
+  }
   .card{padding:23px 18px;border-radius:23px}
   .garden{min-height:330px}
   .tulip{transform:scale(.78);transform-origin:bottom}
@@ -174,6 +180,7 @@ p{line-height:1.7}
 </section>
 
 <section class="page light" id="p1">
+  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
  <div class="petals" id="petals1"></div>
  <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
  <div class="card storyline">
@@ -187,6 +194,7 @@ p{line-height:1.7}
 </section>
 
 <section class="page light" id="p2">
+  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
  <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
  <div class="card">
    <div class="small">The little things</div><h2>Our Kind of Magic</h2>
@@ -201,6 +209,7 @@ p{line-height:1.7}
 </section>
 
 <section class="page" id="p3">
+  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
  <div class="stars"></div><div class="petals" id="petals3"></div>
  <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
  <div class="puzzle-wrap">
@@ -214,6 +223,7 @@ p{line-height:1.7}
 </section>
 
 <section class="page light" id="p4">
+  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
  <div class="petals" id="petals4"></div>
  <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
  <div class="quiz card">
@@ -223,6 +233,7 @@ p{line-height:1.7}
 </section>
 
 <section class="page light" id="p5">
+  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
  <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
  <div class="card" style="text-align:center">
    <div class="small">A garden of meanings</div><h2>For My Purple Tulip</h2>
@@ -236,6 +247,7 @@ p{line-height:1.7}
 </section>
 
 <section class="page" id="p6">
+  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
  <div class="stars"></div><div class="petals" id="petals6"></div>
  <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
  <div class="proposal">
@@ -251,6 +263,7 @@ p{line-height:1.7}
 </section>
 
 <section class="page" id="p7">
+  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
  <div class="stars"></div><div class="fireworks" id="fireworks"></div>
  <div class="petals" id="petals7"></div>
  <div class="celebrate">
@@ -263,6 +276,7 @@ p{line-height:1.7}
 </section>
 
 <section class="page light" id="p8">
+  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
  <div class="petals" id="petals8"></div>
  <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
  <article class="letter">
@@ -283,6 +297,7 @@ p{line-height:1.7}
 </section>
 
 <section class="page" id="p9">
+  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
  <div class="stars"></div><div class="petals" id="petals9"></div>
  <div class="celebrate">
    <div class="small">Our little promise</div>
@@ -300,6 +315,18 @@ p{line-height:1.7}
 </div>
 
 <script>
+
+// Navigation is button-only. Mobile swipes/scrolling never change pages.
+document.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    document.body.dataset.touchStartY = e.touches[0].clientY;
+  }
+}, {passive:true});
+
+document.addEventListener('touchend', e => {
+  delete document.body.dataset.touchStartY;
+}, {passive:true});
+
 const pages=[...document.querySelectorAll('.page')];
 let current=0;
 const progress=document.getElementById('progress');
@@ -433,7 +460,9 @@ function createHearts(){
 const st=document.createElement('style');st.textContent='@keyframes rise{to{transform:translateY(-100vh) rotate(360deg) scale(.3);opacity:0}}';document.head.appendChild(st);
 
 /* Navigation is intentionally button-only.
-   No swipe-back, no keyboard page switching, no clickable progress dots. */
+   Next = the existing buttons inside each page.
+   Previous = the fixed "Previous" button on pages 2–10.
+   Scrolling/swiping on mobile never changes the page. */
 </script>
 </body>
 </html>
