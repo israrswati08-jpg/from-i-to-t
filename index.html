@@ -2,718 +2,408 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<title>Israr &amp; Tahira &mdash; Our Story</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#160b2d">
+<title>Tahira & Israr — Our Little Forever</title>
 <style>
-  :root{
-    --night-deep:#241131;
-    --night-mid:#3b1f52;
-    --plum:#5a3378;
-    --lilac:#c9a8e0;
-    --lilac-soft:#e6d7f2;
-    --lilac-pale:#f4ecfa;
-    --paper:#fbf6ff;
-    --gold:#e3c27a;
-    --gold-soft:#f0dca7;
-    --ink:#2c1a3d;
-    --ink-soft:#6a5980;
-    --rose:#e3b7c9;
-    --shadow-tulip:#8a5eb0;
-    --stem:#5c8a4a;
-    --stem-deep:#3f6a34;
-  }
-  *,*::before,*::after{box-sizing:border-box;}
-  html,body{height:100%;}
-  body{
-    margin:0;
-    font-family:'Jost',sans-serif;
-    background:var(--night-deep);
-    color:var(--ink);
-    overflow:hidden;
-    -webkit-tap-highlight-color:transparent;
-  }
-  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;}
-  @media (prefers-reduced-motion:reduce){
-    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
-  }
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Great+Vibes&display=swap');
 
-  /* =============== APP SHELL / BOOK =============== */
-  #app{position:fixed;inset:0;overflow:hidden;}
-  #book{position:absolute;inset:0;perspective:1500px;}
-  .page{
-    position:absolute;inset:0;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    padding:calc(env(safe-area-inset-top,0px) + 1.6rem) 1.3rem calc(env(safe-area-inset-bottom,0px) + 5.4rem);
-    text-align:center;overflow-y:auto;overflow-x:hidden;
-    transform-style:preserve-3d;
-    transition:transform .85s cubic-bezier(.4,0,.2,1), opacity .6s ease;
-    -webkit-overflow-scrolling:touch;
-  }
-  .page.is-active{transform:none;opacity:1;z-index:5;pointer-events:auto;}
-  .page.is-prev{transform:rotateY(-32deg) translateZ(-160px) translateX(-4%) scale(.88);opacity:0;z-index:1;pointer-events:none;}
-  .page.is-next{transform:rotateY(32deg) translateZ(-160px) translateX(4%) scale(.88);opacity:0;z-index:1;pointer-events:none;}
+:root{
+  --ink:#24143d;--lav:#c7a2ff;--purple:#7950d9;--deep:#160b2d;
+  --pink:#ffd9ec;--cream:#fff9fc;--gold:#f7d58a;--glass:rgba(255,255,255,.13);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",sans-serif;background:var(--deep);color:white;overflow-x:hidden}
+button{font:inherit;border:0;cursor:pointer}
+#app{min-height:100svh;position:relative}
+.page{display:none;min-height:100svh;padding:72px 18px 42px;position:relative;overflow:hidden}
+.page.active{display:flex;flex-direction:column;align-items:center;justify-content:center;animation:pageIn .8s ease both}
+@keyframes pageIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.serif{font-family:"Cormorant Garamond",serif}
+.script{font-family:"Great Vibes",cursive}
+h1{font:500 clamp(3.1rem,14vw,6.5rem)/.88 "Great Vibes",cursive}
+h2{font:600 clamp(2.3rem,9vw,4.2rem)/.95 "Cormorant Garamond",serif}
+h3{font:600 1.5rem "Cormorant Garamond",serif}
+p{line-height:1.7}
+.small{font-size:.82rem;opacity:.75;letter-spacing:.08em;text-transform:uppercase}
+.topbar{position:absolute;top:18px;left:18px;right:18px;display:flex;justify-content:space-between;align-items:center;z-index:20;font-size:.78rem}
+.brand{letter-spacing:.2em}
+.navdot{width:36px;height:36px;border:1px solid rgba(255,255,255,.3);border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08)}
+.progress{position:absolute;bottom:15px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:20}
+.progress i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.3)}
+.progress i.on{width:18px;border-radius:10px;background:#fff}
+.btn{padding:14px 25px;border-radius:999px;color:white;background:linear-gradient(135deg,#a879ff,#6941ca);box-shadow:0 12px 35px rgba(121,80,217,.4);transition:.25s;position:relative;overflow:hidden}
+.btn:active{transform:scale(.96)}
+.btn.outline{background:transparent;border:1px solid rgba(255,255,255,.45);box-shadow:none}
+.btn.pink{background:linear-gradient(135deg,#ff8fca,#a66cff)}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent,rgba(255,255,255,.35),transparent);transform:translateX(-120%);animation:shine 3.2s infinite}
+@keyframes shine{55%,100%{transform:translateX(120%)}}
 
-  .page-label{
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;
-    color:var(--label-color,var(--shadow-tulip));opacity:.8;margin:0 0 .3rem;
-  }
-  .page-heading{font-size:clamp(1.9rem,7vw,2.7rem);margin:0 0 .9rem;font-weight:500;color:var(--heading-color,var(--plum));}
-  .page-heading em{font-style:italic;color:var(--shadow-tulip);}
-  .lede{max-width:58ch;font-size:clamp(.98rem,2.6vw,1.1rem);line-height:1.85;color:var(--ink-soft);font-weight:300;}
-  .lede + .lede{margin-top:1rem;}
+/* dreamy background */
+.stars,.petals,.fireworks{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.stars:before,.stars:after{content:"";position:absolute;inset:-20%;background-image:radial-gradient(circle,rgba(255,255,255,.9) 0 1px,transparent 1.5px);background-size:83px 91px;opacity:.55;animation:drift 18s linear infinite}
+.stars:after{background-size:137px 121px;opacity:.25;animation-duration:28s;animation-direction:reverse}
+@keyframes drift{to{transform:translate3d(30px,45px,0)}}
+.petal{position:absolute;top:-10%;width:11px;height:18px;border-radius:80% 15% 80% 15%;background:#e8c8ff;opacity:.7;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(115vh) rotate(420deg);opacity:0}}
+.moon{width:180px;height:180px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#ffe8f8 42%,#d9b7ff 72%);box-shadow:0 0 90px #e9caff;position:absolute;top:10%;right:-70px;opacity:.8}
+.hero-copy{text-align:center;max-width:680px;z-index:2}
+.hero-copy .eyebrow{margin-bottom:20px}
+.hero-copy h1{margin-bottom:20px;text-shadow:0 0 35px rgba(220,180,255,.45)}
+.hero-copy p{max-width:550px;margin:0 auto 28px;color:#f2e9fa}
+.scroll{margin-top:35px;opacity:.65;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase}
 
-  .paper{background:linear-gradient(180deg,var(--lilac-pale),var(--paper));}
-  .night{background:radial-gradient(ellipse at 50% 16%,#4a2a68 0,transparent 55%),linear-gradient(180deg,var(--night-deep) 0%,var(--night-mid) 55%,var(--plum) 100%);}
-  .night *{color:var(--paper);}
-  .night .lede{color:var(--lilac-soft);}
+/* floating heart */
+.heart{position:absolute;width:24px;height:24px;transform:rotate(-45deg);background:#ffb9e0;box-shadow:0 0 35px #ff8dcc;opacity:.75}
+.heart:before,.heart:after{content:"";position:absolute;width:24px;height:24px;border-radius:50%;background:inherit}
+.heart:before{top:-12px}.heart:after{left:12px}
 
-  /* =============== NAV =============== */
-  #pageNav{
-    position:fixed;left:0;right:0;bottom:0;z-index:20;
-    display:flex;align-items:center;justify-content:space-between;gap:.8rem;
-    padding:.7rem 1rem calc(env(safe-area-inset-bottom,0px) + .8rem);
-    background:linear-gradient(0deg,rgba(20,10,32,.92),rgba(20,10,32,.0));
-  }
-  .nav-arrow{
-    appearance:none;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.06);
-    color:var(--lilac-soft);width:40px;height:40px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;flex:none;cursor:pointer;
-    transition:background .25s ease, transform .2s ease;
-  }
-  .nav-arrow:active{transform:scale(.9);}
-  .nav-arrow:disabled{opacity:.25;pointer-events:none;}
-  .nav-arrow svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-  #dots{display:flex;gap:.4rem;flex:1;justify-content:center;flex-wrap:nowrap;}
-  .dot{
-    width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);
-    border:none;padding:0;cursor:pointer;transition:background .3s ease, transform .3s ease;flex:none;
-  }
-  .dot.on{background:var(--gold-soft);transform:scale(1.5);}
+/* story */
+.light{background:linear-gradient(145deg,#fff7fc,#eadcff);color:var(--ink)}
+.light .topbar{color:#4e376e}.light .navdot{border-color:#c9b4dc;background:#fff8}
+.card{width:min(680px,100%);padding:28px;border-radius:28px;background:rgba(255,255,255,.72);box-shadow:0 25px 70px rgba(79,38,117,.14);border:1px solid rgba(255,255,255,.9);backdrop-filter:blur(14px);z-index:2}
+.storyline{text-align:center}
+.storyline h2{margin:10px 0 16px}
+.storyline p{font-family:"Cormorant Garamond",serif;font-size:1.28rem;line-height:1.55;margin-bottom:16px}
+.quote{font:1.8rem "Great Vibes";color:#8154c9;margin:22px 0}
 
-  /* =============== GLOBAL PETALS =============== */
-  #globalPetals{position:fixed;inset:0;pointer-events:none;z-index:10;overflow:hidden;}
-  .petal{
-    position:absolute;top:-8%;width:13px;height:15px;
-    background:linear-gradient(160deg,var(--lilac),var(--shadow-tulip));
-    border-radius:60% 10% 60% 10%;opacity:.8;animation:fall linear infinite;
-    filter:drop-shadow(0 2px 3px rgba(0,0,0,.18));
-  }
-  @keyframes fall{0%{transform:translateY(0) translateX(0) rotate(0deg);}100%{transform:translateY(120vh) translateX(var(--drift,30px)) rotate(360deg);}}
+/* timeline */
+.timeline{display:grid;gap:14px;margin:22px 0}
+.memory{display:flex;gap:15px;align-items:flex-start;padding:16px;border-radius:20px;background:#ffffffaa}
+.memory .ico{width:42px;height:42px;border-radius:14px;background:#ead9ff;display:grid;place-items:center;font-size:1.25rem;flex:none}
+.memory strong{font-family:"Cormorant Garamond";font-size:1.25rem}
 
-  /* =============== COVER =============== */
-  .stars{position:absolute;inset:0;z-index:0;}
-  .star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.7;animation:twinkle 3s ease-in-out infinite;}
-  @keyframes twinkle{0%,100%{opacity:.15;}50%{opacity:.9;}}
-  .cover-3d{position:relative;z-index:2;perspective:900px;}
-  .cover-bouquet{display:flex;justify-content:center;gap:6px;margin-bottom:1rem;transform-style:preserve-3d;}
-  .cover-bouquet svg{width:34px;animation:tulipFloat 4.5s ease-in-out infinite;}
-  .kicker-names{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.05rem,4vw,1.3rem);color:var(--lilac-soft);margin:0 0 .5rem;}
-  .hero-title{font-size:clamp(2.5rem,10vw,4.4rem);line-height:1.03;margin:0 0 1rem;color:var(--paper);font-weight:500;}
-  .hero-title em{font-style:italic;color:var(--gold-soft);}
-  .hero-sub{color:var(--lilac-soft);font-size:clamp(.95rem,3vw,1.08rem);line-height:1.75;max-width:36ch;margin:0 auto 2.1rem;font-weight:300;}
-  .btn{
-    appearance:none;border:1px solid var(--gold-soft);background:transparent;color:var(--gold-soft);
-    font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;
-    padding:.8rem 2.1rem;border-radius:999px;cursor:pointer;transition:background .35s ease,color .35s ease,transform .2s ease;
-  }
-  .btn:active{transform:scale(.95);}
-  .btn:hover{background:var(--gold-soft);color:var(--night-deep);}
-  .btn-solid{background:var(--gold-soft);color:var(--night-deep);}
-  .btn-solid:hover{background:var(--gold);}
-  .btn-plum{border-color:var(--shadow-tulip);color:var(--plum);}
-  .btn-plum:hover{background:var(--shadow-tulip);color:#fff;}
+/* puzzle */
+.puzzle-wrap{width:min(460px,100%);text-align:center;z-index:2}
+.puzzle{margin:24px auto;width:min(340px,90vw);aspect-ratio:1;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;perspective:800px}
+.tile{background:linear-gradient(145deg,#d9b9ff,#7c50c9);border-radius:10px;display:grid;place-items:center;font-size:2rem;box-shadow:inset 0 0 0 1px #fff5;transition:.35s;min-height:80px}
+.tile.empty{background:#ffffff12;border:1px dashed #ffffff55}
+.tile:not(.empty):active{transform:scale(.94) rotateY(12deg)}
+#puzzleMsg{min-height:26px;margin:10px}
 
-  /* =============== TIMELINE =============== */
-  .timeline{display:flex;flex-direction:column;gap:1.3rem;max-width:520px;width:100%;margin-top:1.8rem;text-align:left;}
-  .t-row{display:flex;gap:1rem;align-items:flex-start;opacity:0;transform:translateX(-14px);animation:tIn .7s ease forwards;}
-  .t-row:nth-child(1){animation-delay:.05s;} .t-row:nth-child(2){animation-delay:.18s;}
-  .t-row:nth-child(3){animation-delay:.31s;} .t-row:nth-child(4){animation-delay:.44s;}
-  .t-row:nth-child(5){animation-delay:.57s;} .t-row:nth-child(6){animation-delay:.7s;}
-  @keyframes tIn{to{opacity:1;transform:none;}}
-  .t-dot{flex:none;width:10px;height:10px;margin-top:.4rem;border-radius:50%;background:var(--shadow-tulip);box-shadow:0 0 0 4px var(--lilac-soft);}
-  .t-row p{margin:0;color:var(--ink-soft);font-size:.96rem;line-height:1.75;font-weight:300;}
-  .t-row strong{color:var(--plum);font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.05rem;}
+/* quiz */
+.quiz{width:min(600px,100%);z-index:2}
+.question{font:600 2rem "Cormorant Garamond";text-align:center;margin:18px 0 22px}
+.answers{display:grid;gap:11px}
+.answer{padding:15px 17px;text-align:left;border-radius:17px;background:#ffffffb8;color:#37214e;border:1px solid #fff;transition:.2s}
+.answer:hover{transform:translateY(-2px)}
+.answer.correct{background:#dff8e9;border-color:#76c997}
+.answer.wrong{background:#ffe1ec;border-color:#ee8eaa}
+.quiz-score{text-align:center;margin-top:16px;font-weight:600}
 
-  /* =============== QUIZ =============== */
-  .quiz-card{max-width:460px;width:100%;margin-top:1rem;}
-  .quiz-progress{font-size:.8rem;color:var(--ink-soft);letter-spacing:.03em;margin-bottom:.6rem;}
-  .quiz-q{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--plum);margin:0 0 1.1rem;font-weight:600;}
-  .quiz-opts{display:flex;flex-direction:column;gap:.65rem;}
-  .quiz-opt{
-    appearance:none;text-align:left;border:1px solid rgba(90,51,120,.25);background:rgba(255,255,255,.55);
-    color:var(--ink);padding:.75rem 1rem;border-radius:14px;font-size:.95rem;cursor:pointer;font-family:'Jost',sans-serif;
-    transition:background .25s ease, border-color .25s ease, transform .15s ease;
-  }
-  .quiz-opt:active{transform:scale(.98);}
-  .quiz-opt.correct{background:rgba(201,168,224,.55);border-color:var(--shadow-tulip);}
-  .quiz-opt.wrong{background:rgba(227,183,201,.4);border-color:var(--rose);}
-  .quiz-opt[disabled]{cursor:default;}
-  .quiz-feedback{
-    margin-top:1rem;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--plum);
-    font-size:1.08rem;line-height:1.6;min-height:1.4rem;
-  }
-  .quiz-next{margin-top:1.3rem;opacity:0;pointer-events:none;transition:opacity .4s ease;}
-  .quiz-next.show{opacity:1;pointer-events:auto;}
-  .quiz-final{max-width:440px;}
+/* tulip garden */
+.garden{width:100%;max-width:800px;min-height:390px;position:relative;margin-top:10px;z-index:2}
+.ground{position:absolute;bottom:0;left:-10%;width:120%;height:130px;border-radius:50% 50% 0 0;background:linear-gradient(#3d8057,#1c5139);box-shadow:0 -15px 50px #253c36}
+.tulip{position:absolute;bottom:74px;width:45px;height:115px;animation:sway 3s ease-in-out infinite alternate;transform-origin:bottom}
+.tulip .stem{position:absolute;bottom:0;left:21px;width:5px;height:82px;background:#55945e;border-radius:5px}
+.tulip .leaf{position:absolute;bottom:15px;width:28px;height:12px;background:#6aaa70;border-radius:100% 0 100% 0}
+.tulip .leaf.l{left:0;transform:rotate(25deg)}.tulip .leaf.r{right:0;transform:scaleX(-1) rotate(25deg)}
+.tulip .bloom{position:absolute;top:0;left:5px;width:36px;height:45px;border-radius:45% 45% 50% 50%;background:linear-gradient(90deg,#9a66d8,#d6a7ff,#8b5bc4);clip-path:polygon(0 20%,25% 35%,50% 0,75% 35%,100% 20%,92% 85%,50% 100%,8% 85%)}
+@keyframes sway{to{transform:rotate(5deg)}}
+.tulip-info{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.meaning{padding:8px 12px;border-radius:999px;background:#ffffffb8;color:#4a2c61;font-size:.78rem}
 
-  /* =============== FLIP CARDS (reasons) =============== */
-  .cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem;max-width:460px;width:100%;margin-top:1.6rem;}
-  .flip-card{aspect-ratio:1/1.05;perspective:1000px;cursor:pointer;-webkit-user-select:none;user-select:none;}
-  .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.4,0,.2,1);}
-  .flip-card.flipped .flip-inner{transform:rotateY(180deg);}
-  .flip-face{
-    position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
-    border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    padding:.7rem;box-shadow:0 10px 22px -14px rgba(90,51,120,.5);
-  }
-  .flip-front{background:linear-gradient(160deg,var(--lilac-soft),var(--paper));border:1px solid rgba(90,51,120,.18);}
-  .flip-front span{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--shadow-tulip);font-size:.82rem;margin-top:.35rem;}
-  .flip-back{background:linear-gradient(160deg,var(--shadow-tulip),var(--plum));transform:rotateY(180deg);}
-  .flip-back p{color:var(--paper);font-family:'Cormorant Garamond',serif;font-size:.92rem;line-height:1.5;font-style:italic;margin:0;}
+/* proposal */
+.proposal{text-align:center;z-index:3}
+.ring{width:170px;height:170px;margin:20px auto;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#fff5ff,#c99aff 42%,transparent 43%);box-shadow:0 0 70px #c07aff;animation:pulse 2s infinite}
+.ring span{font-size:4.5rem;filter:drop-shadow(0 0 15px #fff)}
+@keyframes pulse{50%{transform:scale(1.06);box-shadow:0 0 100px #d7a6ff}}
+.proposal h2{font-size:clamp(3rem,13vw,5.5rem)}
+.choice{display:flex;justify-content:center;gap:16px;margin-top:25px}
+#noBtn{transition:.25s}
 
-  /* =============== GARDEN =============== */
-  .garden-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;max-width:440px;width:100%;margin:1.7rem auto 1.2rem;}
-  .tulip-plot{
-    background:rgba(255,255,255,.5);border:1px solid rgba(90,51,120,.15);border-radius:18px;
-    padding:.6rem .3rem .8rem;display:flex;flex-direction:column;align-items:center;cursor:pointer;
-    -webkit-user-select:none;user-select:none;transition:background .3s ease, transform .25s ease;
-    perspective:400px;
-  }
-  .tulip-plot:active{transform:scale(.94);}
-  .tulip-plot.bloomed{background:rgba(201,168,224,.3);}
-  .tulip-svg{width:52px;height:66px;transition:transform .6s cubic-bezier(.2,1.4,.4,1);transform-style:preserve-3d;}
-  .tulip-plot:not(.bloomed) .tulip-svg{transform:translateY(8px) scale(.75) rotateX(35deg);opacity:.5;filter:grayscale(.45);}
-  .tulip-plot.bloomed .tulip-svg{transform:translateY(0) scale(1) rotateX(0);opacity:1;filter:none;animation:sway3d 3.8s ease-in-out infinite;}
-  @keyframes sway3d{0%,100%{transform:rotateZ(-3deg) rotateY(-6deg);}50%{transform:rotateZ(3deg) rotateY(6deg);}}
-  @keyframes tulipFloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-9px) rotate(3deg);}}
-  .plot-label{font-size:.68rem;color:var(--ink-soft);margin-top:.2rem;}
-  .garden-msg{min-height:70px;max-width:420px;width:100%;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--plum);font-size:1.1rem;line-height:1.6;padding:.3rem 1rem;}
-  .continue-wrap{margin-top:1.1rem;opacity:0;pointer-events:none;transition:opacity .6s ease;}
-  .continue-wrap.ready{opacity:1;pointer-events:auto;}
+/* letter */
+.letter{max-width:690px;padding:30px 25px;background:linear-gradient(145deg,#fffdfd,#f4e7ff);color:#38204f;border-radius:10px;box-shadow:0 35px 80px #0002;position:relative;z-index:2}
+.letter:before{content:"";position:absolute;inset:10px;border:1px solid #d8c0e8;pointer-events:none}
+.letter h2{text-align:center;margin-bottom:18px}
+.letter p{font-family:"Cormorant Garamond";font-size:1.25rem;line-height:1.6;margin:13px 0}
+.signature{font:2.5rem "Great Vibes";text-align:right;color:#7650bb;margin-top:20px}
 
-  /* floating field for cover/closing */
-  .tulip-field{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;}
-  .field-tulip{position:absolute;bottom:-4%;animation:fieldSway ease-in-out infinite;transform-origin:bottom center;}
-  @keyframes fieldSway{0%,100%{transform:rotate(-4deg) translateY(0);}50%{transform:rotate(4deg) translateY(-6px);}}
+/* yes */
+.celebrate{text-align:center;z-index:4}
+.firework{position:absolute;width:6px;height:6px;border-radius:50%;background:white;box-shadow:0 0 8px white;animation:burst 2.2s ease-out infinite}
+@keyframes burst{0%{transform:scale(.2);opacity:1}70%{box-shadow:0 -90px 0 #ffd1f0,65px -65px 0 #d4b3ff,90px 0 #fff,65px 65px 0 #ffd1f0,0 90px #fff,-65px 65px #d4b3ff,-90px 0 #fff,-65px -65px #ffd1f0}100%{transform:scale(1.3);opacity:0}}
+.big-heart{font-size:5rem;animation:beat 1.2s infinite}
+@keyframes beat{50%{transform:scale(1.15)}}
+.final-buttons{display:flex;gap:10px;justify-content:center;margin-top:25px;flex-wrap:wrap}
 
-  /* =============== PLEDGE =============== */
-  .pledge-card{position:relative;max-width:430px;width:100%;background:var(--paper);border:1.5px solid var(--gold);border-radius:8px;padding:2.2rem 1.5rem 2rem;box-shadow:0 22px 46px -18px rgba(90,51,120,.55);}
-  .pledge-card::before{content:"";position:absolute;inset:8px;border:1px solid var(--gold-soft);border-radius:4px;pointer-events:none;}
-  .pledge-kicker{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;color:var(--shadow-tulip);margin:0 0 .3rem;}
-  .pledge-title{font-size:1.4rem;color:var(--ink-soft);margin:0 0 1.3rem;font-style:italic;font-family:'Cormorant Garamond',serif;}
-  .pledge-names{display:flex;align-items:center;justify-content:center;gap:.9rem;margin-bottom:1.3rem;}
-  .pledge-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.45rem,7vw,2rem);color:var(--plum);font-weight:600;}
-  .pledge-amp{color:var(--gold);font-size:1.3rem;}
-  .pledge-line{font-size:.9rem;color:var(--ink-soft);line-height:1.85;font-weight:300;margin:0 0 .7rem;text-align:left;}
-  .seal{width:50px;height:50px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--gold-soft),var(--gold) 70%);display:flex;align-items:center;justify-content:center;margin:1.2rem auto 0;box-shadow:0 6px 16px -6px rgba(180,140,50,.6);}
-  .seal svg{width:22px;height:22px;fill:var(--paper);}
-
-  /* =============== PROPOSAL =============== */
-  #fireworks-canvas{position:absolute;inset:0;z-index:1;pointer-events:none;}
-  .bouquet{display:flex;justify-content:center;align-items:flex-end;gap:2px;margin-bottom:1rem;perspective:700px;}
-  .bouquet svg{width:30px;transition:transform .3s ease;}
-  .bouquet svg:nth-child(1){transform:rotate(-16deg) translateY(6px);animation:bqSway 4.2s ease-in-out infinite;}
-  .bouquet svg:nth-child(2){transform:rotate(-7deg) translateY(1px);animation:bqSway 3.6s ease-in-out infinite .2s;}
-  .bouquet svg:nth-child(3){transform:scale(1.15);animation:bqSway 4s ease-in-out infinite .1s;}
-  .bouquet svg:nth-child(4){transform:rotate(7deg) translateY(1px);animation:bqSway 3.8s ease-in-out infinite .3s;}
-  .bouquet svg:nth-child(5){transform:rotate(16deg) translateY(6px);animation:bqSway 4.4s ease-in-out infinite .15s;}
-  @keyframes bqSway{0%,100%{filter:none;}50%{filter:brightness(1.06);}}
-  .q-title{font-size:clamp(2rem,8vw,3.1rem);color:var(--paper);margin:0 0 1.4rem;font-weight:500;}
-  .q-title em{color:var(--gold-soft);font-style:italic;}
-  .q-sub{color:var(--lilac-soft);font-size:.95rem;max-width:34ch;margin:0 auto 1.6rem;font-weight:300;line-height:1.7;}
-  .btn-row{position:relative;display:flex;gap:1.3rem;align-items:center;justify-content:center;min-height:80px;flex-wrap:wrap;}
-  .no-btn{position:relative;transition:transform .18s ease;}
-  .proposal-result{margin-top:1.5rem;min-height:1.6rem;color:var(--gold-soft);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.12rem;}
-
-  /* =============== LETTER =============== */
-  .letter-card{max-width:520px;width:100%;background:var(--paper);border-radius:12px;padding:2.2rem 1.6rem 2rem;text-align:left;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);}
-  .letter-to{font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:var(--plum);margin:0 0 1rem;font-style:italic;}
-  .letter-body p{font-size:.96rem;line-height:1.9;color:var(--ink);font-weight:300;margin:0 0 1rem;}
-  .letter-urdu{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--shadow-tulip);font-size:1.02rem;line-height:1.8;}
-  .letter-sign{margin-top:1.3rem;font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--plum);font-style:italic;}
-
-  /* =============== CLOSING =============== */
-  .closing-mark{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.6rem;color:var(--gold-soft);margin-top:1.5rem;}
-
-  @media (min-width:640px){
-    .garden-grid{max-width:520px;}
-    .cards-grid{grid-template-columns:repeat(4,1fr);max-width:640px;}
-  }
+/* responsive */
+@media(max-width:500px){
+  .page{padding:64px 14px 35px}
+  .card{padding:23px 18px;border-radius:23px}
+  .garden{min-height:330px}
+  .tulip{transform:scale(.78);transform-origin:bottom}
+  .tulip:nth-child(3n){display:none}
+  .letter{padding:24px 18px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+}
 </style>
 </head>
 <body>
-
-<div id="globalPetals"></div>
-
 <div id="app">
-  <div id="book">
 
-    <!-- 0 COVER -->
-    <div class="page night" id="p0">
-      <div class="stars"></div>
-      <div class="tulip-field" id="coverField"></div>
-      <div class="cover-3d">
-        <div class="cover-bouquet" id="coverBouquet"></div>
-        <p class="kicker-names">Israr &amp; Tahira</p>
-        <h1 class="hero-title">All of you,<br><em>and forever ahead.</em></h1>
-        <p class="hero-sub">A little storybook I made for you, jaan &mdash; turn the pages: our story, a silly quiz, a garden, a promise, and a question at the very end.</p>
-        <button class="btn" id="enterBtn">Turn the first page</button>
-      </div>
-    </div>
-
-    <!-- 1 STORY -->
-    <div class="page paper" id="p1">
-      <p class="page-label">Chapter one</p>
-      <h2 class="page-heading">Where we <em>began</em></h2>
-      <p class="lede">More than a year now, Tahira. Somewhere between the arguments we didn't mean and the laughter we couldn't stop, you quietly became the person I plan my whole life around.</p>
-      <div class="timeline">
-        <div class="t-row"><span class="t-dot"></span><p><strong>The beginning &mdash;</strong> two people who somehow already knew each other's silences, and never needed to explain the small things.</p></div>
-        <div class="t-row"><span class="t-dot"></span><p><strong>The small fights &mdash;</strong> we've debated, gone quiet, sulked a little, and come back anyway &mdash; every single time &mdash; because leaving was never actually on the table.</p></div>
-        <div class="t-row"><span class="t-dot"></span><p><strong>The everyday &mdash;</strong> ordinary calls, forwarded reels, and "did you eat yet" messages that somehow became the best part of my day.</p></div>
-        <div class="t-row"><span class="t-dot"></span><p><strong>The hard days &mdash;</strong> the ones where you were upset with me and I felt it in my chest for hours &mdash; and I learned, slowly, how to be gentler.</p></div>
-        <div class="t-row"><span class="t-dot"></span><p><strong>The good days &mdash;</strong> which, honestly, were most of them &mdash; you, me, and a whole world that felt lighter because we were in it together.</p></div>
-        <div class="t-row"><span class="t-dot"></span><p><strong>Right now &mdash;</strong> one year and more in, still choosing you, still certain, still yours.</p></div>
-      </div>
-      <button class="btn btn-plum" id="toQuiz" style="margin-top:2rem;">Next &mdash; a silly little quiz</button>
-    </div>
-
-    <!-- 2 QUIZ -->
-    <div class="page paper" id="p2">
-      <p class="page-label">Chapter two</p>
-      <h2 class="page-heading">A quiz, just <em>for fun</em></h2>
-      <p class="lede" style="margin-bottom:.6rem;">Guess how I feel &mdash; there's no wrong answer, jaan, only sweeter ones.</p>
-      <div class="quiz-card" id="quizCard"></div>
-    </div>
-
-    <!-- 3 REASONS -->
-    <div class="page paper" id="p3">
-      <p class="page-label">Chapter three</p>
-      <h2 class="page-heading">Reasons, <em>tap to open</em></h2>
-      <p class="lede">Eight of the hundred things. Tap a tulip to read one.</p>
-      <div class="cards-grid" id="cardsGrid"></div>
-    </div>
-
-    <!-- 4 GARDEN -->
-    <div class="page paper" id="p4">
-      <p class="page-label">Chapter four</p>
-      <h2 class="page-heading">Your <em>tulip garden</em></h2>
-      <p class="lede">You told me once you love light purple tulips. So I planted six &mdash; tap each one to let it bloom.</p>
-      <div class="garden-grid" id="gardenGrid"></div>
-      <p class="garden-msg" id="gardenMsg">&nbsp;</p>
-      <div class="continue-wrap" id="gardenContinue"><button class="btn btn-plum" id="toPledge">The garden is full &mdash; keep going</button></div>
-    </div>
-
-    <!-- 5 PLEDGE -->
-    <div class="page paper" id="p5">
-      <p class="page-label">Chapter five</p>
-      <h2 class="page-heading">A <em>promise</em>, written down</h2>
-      <div class="pledge-card">
-        <p class="pledge-kicker">A pledge, before I ask you properly</p>
-        <p class="pledge-title">InshaAllah, our forever begins</p>
-        <div class="pledge-names"><span class="pledge-name">Israr</span><span class="pledge-amp">&amp;</span><span class="pledge-name">Tahira</span></div>
-        <p class="pledge-line">I promise to keep you happy on the ordinary days, not only the good ones. To fight fair, forgive faster, and never let a disagreement outweigh us.</p>
-        <p class="pledge-line">I promise to build every wish we've whispered about, one by one, together &mdash; the small ones and the big ones.</p>
-        <p class="pledge-line" style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--shadow-tulip);">Meri jaan, meri dulhan banogi &mdash; jab main tumhein bohot saara pyaar dunga. Hum apni saari khwahishen saath poori karenge, InshaAllah.</p>
-        <div class="seal"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.2 2.2 4 6.4 4c2.2 0 3.9 1.2 5.6 3.4C13.7 5.2 15.4 4 17.6 4 21.8 4 23.7 8.2 22 11.7 19.5 16.4 12 21 12 21z"/></svg></div>
-      </div>
-      <button class="btn btn-plum" id="toProposal" style="margin-top:1.8rem;">One question left &darr;</button>
-    </div>
-
-    <!-- 6 PROPOSAL -->
-    <div class="page night" id="p6">
-      <canvas id="fireworks-canvas"></canvas>
-      <div class="tulip-field" id="proposalField"></div>
-      <div class="bouquet" id="bouquet"></div>
-      <h2 class="q-title">Will you <em>marry me</em>?</h2>
-      <p class="q-sub">Every fight, every reel, every quiet Tuesday &mdash; led here. Meri jaan, my whole world, my forever.</p>
-      <div class="btn-row" id="btnRow">
-        <button class="btn btn-solid yes-btn" id="yesBtn">Yes, always</button>
-        <button class="btn no-btn" id="noBtn">Not yet</button>
-      </div>
-      <p class="proposal-result" id="proposalResult">&nbsp;</p>
-    </div>
-
-    <!-- 7 LETTER -->
-    <div class="page night" id="p7">
-      <div class="letter-card">
-        <p class="letter-to">To my Tahira,</p>
-        <div class="letter-body">
-          <p>You are the whole world I somehow get to hold in one pair of hands. Every little thing &mdash; a message, a laugh, a five-minute call between chores &mdash; still feels like the best part of my day, even after a year of it.</p>
-          <p>When you're upset with me, something in my chest goes quiet, and I carry it longer than I let on. When I'm the one who's low, I go too far inward, and I know that's not fair to you either. So here's my promise, plainly: I will keep choosing you, keep showing up softer after every disagreement, and never let a fight matter more than us.</p>
-          <p>I want to complete every wish we've ever spoken about &mdash; the small ones like a lazy Sunday with no phones, and the big one, InshaAllah, of a home that's fully ours.</p>
-          <p class="letter-urdu">Tahira, tum hamesha meri ho, aur Israr hamesha tumhara.<br>I love you, and I don't want a single second without you.</p>
-          <p>Take care of yourself the way you take care of everyone else. And &mdash; take care of me too, jaan. That's all I'm asking for, along with forever.</p>
-        </div>
-        <p class="letter-sign">Always yours,<br>Israr</p>
-      </div>
-      <button class="btn" id="toClosing" style="margin-top:1.6rem;">One last page</button>
-    </div>
-
-    <!-- 8 CLOSING -->
-    <div class="page night" id="p8">
-      <div class="tulip-field" id="closingField"></div>
-      <h2 class="page-heading" style="color:var(--paper);">Not the end &mdash;<br><em>just the beginning</em></h2>
-      <p class="lede">Thank you for reading all the way to the last page, the way you've stayed through every ordinary day this past year. Here's to every page still unwritten.</p>
-      <p class="closing-mark">Tahira &amp; Israr, InshaAllah</p>
-      <button class="btn" id="replayBtn" style="margin-top:1.8rem;">Read it again</button>
-    </div>
-
+<section class="page active" id="p0">
+  <div class="stars"></div><div class="moon"></div>
+  <div class="petals" id="petals0"></div>
+  <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
+  <div class="hero-copy">
+    <div class="small eyebrow">A little universe, made for two</div>
+    <h1>Tahira & Israr</h1>
+    <p class="serif" style="font-size:1.45rem">Some stories are written in pages. Ours is written in little moments, quiet smiles, silly conversations, and two hearts that keep choosing each other.</p>
+    <button class="btn" onclick="go(1)">Open Our Story ♡</button>
+    <div class="scroll">tap to begin · slowly · softly</div>
   </div>
+</section>
 
-  <nav id="pageNav">
-    <button class="nav-arrow" id="prevArrow" aria-label="Previous page"><svg viewBox="0 0 24 24"><polyline points="15 6 9 12 15 18"/></svg></button>
-    <div id="dots"></div>
-    <button class="nav-arrow" id="nextArrow" aria-label="Next page"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
-  </nav>
+<section class="page light" id="p1">
+ <div class="petals" id="petals1"></div>
+ <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
+ <div class="card storyline">
+   <div class="small">Chapter one</div>
+   <h2>Somehow, You Became Home</h2>
+   <p>There is a beautiful kind of love that doesn't need a grand entrance. It arrives through conversations, laughter, tiny updates, comfortable silence, and the feeling that you can finally be completely yourself.</p>
+   <p>That is what you became to me, Tahira. Not simply someone I love, but someone whose presence makes ordinary days feel softer.</p>
+   <div class="quote">“If my heart had a favorite place, it would be wherever you are.”</div>
+   <button class="btn pink" onclick="go(2)">Turn the page →</button>
+ </div>
+</section>
+
+<section class="page light" id="p2">
+ <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
+ <div class="card">
+   <div class="small">The little things</div><h2>Our Kind of Magic</h2>
+   <div class="timeline">
+    <div class="memory"><div class="ico">☾</div><div><strong>Late conversations</strong><p>When “just five minutes” somehow becomes a whole world of stories.</p></div></div>
+    <div class="memory"><div class="ico">♡</div><div><strong>Little updates</strong><p>The tiny details that seem small to everyone else, but mean everything to us.</p></div></div>
+    <div class="memory"><div class="ico">☀</div><div><strong>Making up after storms</strong><p>We may disagree, but our love keeps reminding us that understanding matters more than winning.</p></div></div>
+    <div class="memory"><div class="ico">✦</div><div><strong>Choosing each other</strong><p>Again and again. In laughter, in silence, in imperfect moments and beautiful ones.</p></div></div>
+   </div>
+   <button class="btn pink" onclick="go(3)">A tiny challenge →</button>
+ </div>
+</section>
+
+<section class="page" id="p3">
+ <div class="stars"></div><div class="petals" id="petals3"></div>
+ <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
+ <div class="puzzle-wrap">
+   <div class="small">Love puzzle</div><h2>Put Our Heart Together</h2>
+   <p style="margin-top:10px;opacity:.8">Tap neighboring pieces to move them. Make the heart complete.</p>
+   <div class="puzzle" id="puzzle"></div>
+   <div id="puzzleMsg">A little patience, my love… ♡</div>
+   <button class="btn outline" onclick="shufflePuzzle()">Shuffle Again</button>
+   <button class="btn" style="margin-top:10px" onclick="go(4)">Continue →</button>
+ </div>
+</section>
+
+<section class="page light" id="p4">
+ <div class="petals" id="petals4"></div>
+ <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
+ <div class="quiz card">
+   <div class="small">A playful test</div><h2 style="text-align:center">How Well Do You Know My Heart?</h2>
+   <div id="quizArea"></div>
+ </div>
+</section>
+
+<section class="page light" id="p5">
+ <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
+ <div class="card" style="text-align:center">
+   <div class="small">A garden of meanings</div><h2>For My Purple Tulip</h2>
+   <p style="margin:12px 0">Every tulip below carries a little promise. Tap one and let it bloom.</p>
+   <div class="garden" id="garden">
+    <div class="ground"></div>
+   </div>
+   <div class="tulip-info" id="tulipInfo"><span class="meaning">Purple · admiration</span><span class="meaning">Pink · affection</span><span class="meaning">White · sincerity</span><span class="meaning">Red · devotion</span><span class="meaning">Yellow · sunshine</span></div>
+   <button class="btn pink" style="margin-top:22px" onclick="go(6)">Walk a little further →</button>
+ </div>
+</section>
+
+<section class="page" id="p6">
+ <div class="stars"></div><div class="petals" id="petals6"></div>
+ <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
+ <div class="proposal">
+   <div class="small">A question from my heart</div>
+   <div class="ring"><span>💍</span></div>
+   <h2>Will You Be My Forever?</h2>
+   <p style="max-width:520px;margin:15px auto;opacity:.85">Not because every day will be perfect, but because I want to build the imperfect, beautiful, ordinary, extraordinary days with you.</p>
+   <div class="choice">
+     <button class="btn pink" onclick="sayYes()">Yes, my love ♡</button>
+     <button class="btn outline" id="noBtn" onmouseenter="runAway()" onclick="runAway()">Let me think…</button>
+   </div>
+ </div>
+</section>
+
+<section class="page" id="p7">
+ <div class="stars"></div><div class="fireworks" id="fireworks"></div>
+ <div class="petals" id="petals7"></div>
+ <div class="celebrate">
+   <div class="big-heart">♡</div>
+   <div class="small">The answer my heart was waiting for</div>
+   <h1>You Said Yes!</h1>
+   <p class="serif" style="font-size:1.45rem;max-width:600px;margin:10px auto">Then let this little celebration be the beginning of a thousand more celebrations — with laughter, prayers, adventures, family, dreams and a lifetime of choosing each other.</p>
+   <div class="final-buttons"><button class="btn" onclick="go(8)">Read My Letter →</button></div>
+ </div>
+</section>
+
+<section class="page light" id="p8">
+ <div class="petals" id="petals8"></div>
+ <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
+ <article class="letter">
+   <div class="small" style="text-align:center">A letter I hope you keep</div>
+   <h2>For Tahira, My Beautiful Soul</h2>
+   <p>My love,</p>
+   <p>There are feelings so deep that ordinary sentences feel too small for them. Still, I want to try, because you deserve to know how precious you are to me.</p>
+   <p>You have become one of the gentlest parts of my world. Your voice can turn a difficult day quiet. Your smile can make a simple moment feel special. Even the smallest things we share have found a permanent little corner inside my heart.</p>
+   <p>I don't promise a life without misunderstandings. I promise something more real: that when the clouds arrive, I will choose conversation over silence, understanding over pride, forgiveness over keeping score, and us over the argument.</p>
+   <p>I want to see your dreams become real. I want to celebrate your wins, protect your peace, make you laugh when the day is heavy, and stand beside you when life asks us to be brave.</p>
+   <p>InshaAllah, if life opens that beautiful door for us, I want our future to be full of dua, family, travel, late-night conversations, a home filled with warmth, and countless ordinary mornings that become precious simply because you are there.</p>
+   <p>You are my favorite person to tell things to. My safe place. My happiness in the small moments. My beautiful purple tulip in a garden I never knew my heart was waiting for.</p>
+   <p>And if I ever fail to say it enough: <strong>I choose you with a full heart.</strong></p>
+   <p>Always yours, always cheering for you, always grateful that our paths crossed.</p>
+   <div class="signature">Israr ♡</div>
+ </article>
+ <button class="btn pink" style="margin-top:25px;z-index:3" onclick="go(9)">One last little surprise →</button>
+</section>
+
+<section class="page" id="p9">
+ <div class="stars"></div><div class="petals" id="petals9"></div>
+ <div class="celebrate">
+   <div class="small">Our little promise</div>
+   <h1 style="font-size:clamp(3.5rem,16vw,7rem)">Tahira,<br>Let's Grow Together.</h1>
+   <p class="serif" style="font-size:1.5rem;max-width:620px;margin:20px auto">May we keep finding reasons to laugh, reasons to forgive, reasons to hold hands, and reasons to thank Allah for every beautiful chapter ahead.</p>
+   <div class="final-buttons">
+     <button class="btn" onclick="createHearts()">Send a thousand hearts ♡</button>
+     <button class="btn outline" onclick="go(0)">Read it all again ↺</button>
+   </div>
+   <p id="heartMessage" class="script" style="font-size:2rem;margin-top:25px;min-height:45px"></p>
+ </div>
+</section>
+
+<div class="progress" id="progress"></div>
 </div>
 
 <script>
-(function(){
-  "use strict";
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const pages = Array.from(document.querySelectorAll('.page'));
-  const dotsWrap = document.getElementById('dots');
-  const prevArrow = document.getElementById('prevArrow');
-  const nextArrow = document.getElementById('nextArrow');
-  let current = 0;
+const pages=[...document.querySelectorAll('.page')];
+let current=0;
+const progress=document.getElementById('progress');
+pages.forEach((_,i)=>{const d=document.createElement('i');d.onclick=()=>go(i);progress.appendChild(d)});
+function go(n){
+ current=n;
+ pages.forEach((p,i)=>p.classList.toggle('active',i===n));
+ [...progress.children].forEach((d,i)=>d.classList.toggle('on',i===n));
+ window.scrollTo({top:0,behavior:'smooth'});
+ if(n===3) initPuzzle();
+ if(n===4) initQuiz();
+ if(n===5) initGarden();
+ if(n===7) launchFireworks();
+}
+go(0);
 
-  pages.forEach((_,i)=>{
-    const d=document.createElement('button');
-    d.className='dot'+(i===0?' on':'');
-    d.addEventListener('click',()=>goTo(i));
-    dotsWrap.appendChild(d);
-  });
-  const dots = Array.from(dotsWrap.children);
+/* petals */
+function makePetals(id,count=24){
+ const el=document.getElementById(id); if(!el||el.dataset.ready)return;
+ el.dataset.ready=1;
+ for(let i=0;i<count;i++){
+  const p=document.createElement('span');p.className='petal';
+  p.style.left=Math.random()*100+'%';
+  p.style.animationDuration=(7+Math.random()*8)+'s';
+  p.style.animationDelay=(-Math.random()*12)+'s';
+  p.style.transform=`rotate(${Math.random()*180}deg)`;
+  el.appendChild(p);
+ }
+}
+['petals0','petals1','petals3','petals4','petals6','petals7','petals8','petals9'].forEach(x=>makePetals(x));
 
-  function render(){
-    pages.forEach((el,i)=>{
-      el.classList.remove('is-active','is-prev','is-next');
-      if(i===current) el.classList.add('is-active');
-      else if(i<current) el.classList.add('is-prev');
-      else el.classList.add('is-next');
-    });
-    dots.forEach((d,i)=>d.classList.toggle('on', i===current));
-    prevArrow.disabled = current===0;
-    nextArrow.disabled = current===pages.length-1;
-    if(current===0) pages[0].scrollTop = 0;
-  }
-  function goTo(i){
-    current = Math.max(0, Math.min(pages.length-1, i));
-    render();
-  }
-  prevArrow.addEventListener('click',()=>goTo(current-1));
-  nextArrow.addEventListener('click',()=>goTo(current+1));
-  window.addEventListener('keydown', e=>{
-    if(e.key==='ArrowRight') goTo(current+1);
-    if(e.key==='ArrowLeft') goTo(current-1);
-  });
+/* puzzle */
+let puzzle=[1,2,3,4,5,6,7,8,0];
+function shufflePuzzle(){
+ do{puzzle.sort(()=>Math.random()-.5)}while(!solvable(puzzle)||isSolved());
+ renderPuzzle();
+}
+function solvable(a){let inv=0;for(let i=0;i<8;i++)for(let j=i+1;j<9;j++)if(a[i]&&a[j]&&a[i]>a[j])inv++;return inv%2===0}
+function isSolved(){return puzzle.every((v,i)=>v===i+1||(i===8&&v===0))}
+function renderPuzzle(){
+ const el=document.getElementById('puzzle');el.innerHTML='';
+ puzzle.forEach((v,i)=>{
+  const b=document.createElement('button');b.className='tile'+(!v?' empty':'');
+  b.textContent=v?['✦','♡','✧','❀','♥','✿','☾','∞'][v-1]:'';
+  b.onclick=()=>moveTile(i);el.appendChild(b);
+ });
+}
+function moveTile(i){
+ const z=puzzle.indexOf(0),r=Math.floor(i/3),c=i%3,rz=Math.floor(z/3),cz=z%3;
+ if(Math.abs(r-rz)+Math.abs(c-cz)===1){[puzzle[i],puzzle[z]]=[puzzle[z],puzzle[i]];renderPuzzle();
+ if(isSolved()){document.getElementById('puzzleMsg').textContent='You found it. Just like us — every piece belongs. ♡';}}
+}
+function initPuzzle(){if(!document.getElementById('puzzle').children.length){shufflePuzzle()}}
 
-  /* swipe */
-  let touchX=null, touchY=null;
-  document.getElementById('book').addEventListener('touchstart', e=>{
-    touchX = e.touches[0].clientX; touchY = e.touches[0].clientY;
-  },{passive:true});
-  document.getElementById('book').addEventListener('touchend', e=>{
-    if(touchX===null) return;
-    const dx = e.changedTouches[0].clientX - touchX;
-    const dy = e.changedTouches[0].clientY - touchY;
-    if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)*1.4){
-      if(dx < 0) goTo(current+1); else goTo(current-1);
-    }
-    touchX=null; touchY=null;
-  },{passive:true});
+/* quiz */
+const qs=[
+ ["What is my favorite flower for you?","Purple tulips",["Purple tulips","Roses","Sunflowers","Daisies"]],
+ ["What matters most after a little disagreement?","Understanding each other",["Winning the argument","Being silent","Understanding each other","Keeping score"]],
+ ["What do I want our future to feel like?","A peaceful home full of love",["A perfect movie","A peaceful home full of love","A life without challenges","A life without surprises"]]
+];
+let qi=0,score=0;
+function initQuiz(){qi=0;score=0;drawQ()}
+function drawQ(){
+ const area=document.getElementById('quizArea');
+ if(qi>=qs.length){area.innerHTML=`<div style="text-align:center;padding:20px"><div class="big-heart">♡</div><h3>You scored ${score}/${qs.length}</h3><p style="margin:10px 0 20px">No score can measure us. I just love that you know the little corners of my heart.</p><button class="btn pink" onclick="go(5)">Go to our garden →</button></div>`;return}
+ const q=qs[qi]; area.innerHTML=`<div class="question">${q[0]}</div><div class="answers">${q[2].map((a,i)=>`<button class="answer" onclick="answer(${i},this)">${a}</button>`).join('')}</div><div class="quiz-score">${qi+1} / ${qs.length}</div>`;
+}
+function answer(i,el){
+ const q=qs[qi];[...el.parentElement.children].forEach(x=>x.disabled=true);
+ if(q[2][i]===q[1]){el.classList.add('correct');score++}else{el.classList.add('wrong');[...el.parentElement.children].find(x=>x.textContent===q[1]).classList.add('correct')}
+ setTimeout(()=>{qi++;drawQ()},650)
+}
 
-  render();
+/* tulips */
+function initGarden(){
+ const g=document.getElementById('garden'); if(g.dataset.ready)return;g.dataset.ready=1;
+ const meanings=["admiration","tenderness","sincerity","devotion","sunshine","a beautiful future","patience","home"];
+ meanings.forEach((m,i)=>{
+  const t=document.createElement('div');t.className='tulip';t.style.left=(5+i*12+Math.random()*4)+'%';t.style.animationDelay=(-Math.random()*2)+'s';
+  t.innerHTML=`<div class="bloom"></div><div class="stem"></div><div class="leaf l"></div><div class="leaf r"></div>`;
+  t.onclick=()=>{document.getElementById('tulipInfo').innerHTML=`<span class="meaning">This tulip means: <strong>${m}</strong> ♡</span>`; t.animate([{transform:'scale(1)'},{transform:'scale(1.25)'},{transform:'scale(1)'}],{duration:500})};
+  g.appendChild(t);
+ })
+}
 
-  /* simple button wiring between chapters */
-  document.getElementById('enterBtn').addEventListener('click',()=>goTo(1));
-  document.getElementById('toQuiz').addEventListener('click',()=>goTo(2));
-  document.getElementById('toPledge').addEventListener('click',()=>goTo(5));
-  document.getElementById('toProposal').addEventListener('click',()=>goTo(6));
-  document.getElementById('toClosing').addEventListener('click',()=>goTo(8));
-  document.getElementById('replayBtn').addEventListener('click',()=>goTo(0));
+/* playful no button */
+function runAway(){
+ const b=document.getElementById('noBtn');
+ b.style.position='fixed';
+ b.style.left=(10+Math.random()*70)+'%';
+ b.style.top=(15+Math.random()*70)+'%';
+ b.textContent=['Maybe…','Are you sure?','Think again ♡','No escape!','Try the other one →'][Math.floor(Math.random()*5)];
+}
 
-  /* ---------- stars ---------- */
-  ['p0'].forEach(id=>{
-    const wrap = document.querySelector('#'+id+' .stars');
-    if(!wrap) return;
-    for(let i=0;i<55;i++){
-      const s=document.createElement('div');
-      s.className='star';
-      s.style.left=Math.random()*100+'%';
-      s.style.top=Math.random()*70+'%';
-      s.style.animationDelay=(Math.random()*3)+'s';
-      s.style.width=s.style.height=(Math.random()*1.6+1)+'px';
-      wrap.appendChild(s);
-    }
-  });
+/* yes celebration */
+function sayYes(){go(7)}
+function launchFireworks(){
+ const f=document.getElementById('fireworks');f.innerHTML='';
+ for(let i=0;i<13;i++){
+  const x=document.createElement('span');x.className='firework';
+  x.style.left=(8+Math.random()*84)+'%';x.style.top=(10+Math.random()*70)+'%';
+  x.style.animationDelay=(Math.random()*1.8)+'s';f.appendChild(x);
+ }
+}
+function createHearts(){
+ const msg=document.getElementById('heartMessage');msg.textContent="A thousand hearts, and somehow they still wouldn't be enough. ♡";
+ for(let i=0;i<28;i++){
+  const h=document.createElement('div');h.className='heart';
+  h.style.left=Math.random()*100+'%';h.style.top=(40+Math.random()*55)+'%';
+  h.style.position='fixed';h.style.zIndex=99;h.style.animation=`rise ${2+Math.random()*2}s ease-out forwards`;
+  document.body.appendChild(h);setTimeout(()=>h.remove(),4000);
+ }
+}
+const st=document.createElement('style');st.textContent='@keyframes rise{to{transform:translateY(-100vh) rotate(360deg) scale(.3);opacity:0}}';document.head.appendChild(st);
 
-  /* ---------- global falling petals ---------- */
-  function spawnPetals(container, count){
-    if(reduced) return;
-    for(let i=0;i<count;i++){
-      const p=document.createElement('div');
-      p.className='petal';
-      p.style.left=Math.random()*100+'%';
-      p.style.setProperty('--drift',(Math.random()*80-40)+'px');
-      p.style.animationDuration=(9+Math.random()*10)+'s';
-      p.style.animationDelay=(Math.random()*14)+'s';
-      p.style.opacity=(0.4+Math.random()*0.4);
-      p.style.transform=`scale(${0.6+Math.random()*0.7})`;
-      container.appendChild(p);
-    }
-  }
-  spawnPetals(document.getElementById('globalPetals'), 20);
-
-  /* ---------- tulip svg factory ---------- */
-  function tulipSVG(extra){
-    extra = extra || '';
-    return `<svg class="tulip-svg ${extra}" viewBox="0 0 60 76" xmlns="http://www.w3.org/2000/svg">
-      <path d="M30 70 C30 50 30 38 30 30" stroke="#5c8a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M30 55 C22 52 16 46 14 38 C22 40 27 46 30 52 Z" fill="#6fae56"/>
-      <path d="M30 58 C38 55 44 48 46 40 C38 42 33 48 30 55 Z" fill="#588f43"/>
-      <g>
-        <path d="M30 8 C18 8 15 22 17 30 C19 26 24 22 30 22 C36 22 41 26 43 30 C45 22 42 8 30 8 Z" fill="#c9a8e0"/>
-        <path d="M30 8 C24 8 21 16 21 24 C24 20 27 18 30 18 C33 18 36 20 39 24 C39 16 36 8 30 8 Z" fill="#b28ecf"/>
-        <path d="M17 30 C17 20 22 9 30 8 C29 16 27 24 27 32 C23 32 19 31 17 30 Z" fill="#dcc2ec" opacity="0.85"/>
-      </g>
-    </svg>`;
-  }
-
-  /* cover bouquet */
-  const coverBouquet = document.getElementById('coverBouquet');
-  for(let i=0;i<3;i++){ coverBouquet.insertAdjacentHTML('beforeend', tulipSVG()); }
-  Array.from(coverBouquet.children).forEach((el,i)=>{ el.style.animationDelay=(i*0.4)+'s'; });
-
-  /* proposal bouquet */
-  const bouquet = document.getElementById('bouquet');
-  for(let i=0;i<5;i++){ bouquet.insertAdjacentHTML('beforeend', tulipSVG()); }
-
-  /* floating tulip fields (cover / proposal / closing) */
-  function buildField(id, count){
-    const wrap = document.getElementById(id);
-    if(!wrap) return;
-    for(let i=0;i<count;i++){
-      const holder=document.createElement('div');
-      holder.className='field-tulip';
-      const scale = 0.5 + Math.random()*0.9;
-      holder.style.left = (Math.random()*94)+'%';
-      holder.style.width = (34*scale)+'px';
-      holder.style.opacity = 0.35 + Math.random()*0.5;
-      holder.style.animationDuration = (4+Math.random()*3)+'s';
-      holder.style.animationDelay = (Math.random()*3)+'s';
-      holder.innerHTML = tulipSVG();
-      holder.querySelector('svg').style.width='100%';
-      wrap.appendChild(holder);
-    }
-  }
-  buildField('coverField', 8);
-  buildField('proposalField', 6);
-  buildField('closingField', 9);
-
-  /* ---------- QUIZ ---------- */
-  const quizData = [
-    {q:"What do I think about most, on an ordinary weekday?",
-     opts:["Deadlines and clients","You, honestly, more than I'll admit","Cricket scores"],
-     correct:1,
-     yes:"Correct. Somewhere between meetings, you show up in my head anyway.",
-     no:"Sweet guess &mdash; but no. It's still you, every time."},
-    {q:"What's my favourite colour of tulip, these days?",
-     opts:["Red","Light purple, like the ones you love","Yellow"],
-     correct:1,
-     yes:"Exactly. You made me love a colour I never used to notice.",
-     no:"Close, but it's the light purple ones &mdash; because they're yours."},
-    {q:"When we fight, what do I actually want?",
-     opts:["To win the argument","To make up and hold you again","Complete silence"],
-     correct:1,
-     yes:"Yes. Being right has never once felt as good as being okay with you again.",
-     no:"Not quite &mdash; truth is, I just want us okay again, as fast as possible."},
-    {q:"In one word, what are you to me?",
-     opts:["A friend","Everything","A roommate"],
-     correct:1,
-     yes:"That's the one. Everything &mdash; plainly, completely.",
-     no:"Try again in your heart: it's everything. You're everything."},
-    {q:"What happens on the next page?",
-     opts:["Nothing much","A question I've been carrying for a while","We stay just as we are"],
-     correct:1,
-     yes:"...you'll see soon enough. Keep going.",
-     no:"You'll find out very shortly &mdash; keep turning the pages."}
-  ];
-  let quizIndex = 0;
-  const quizCard = document.getElementById('quizCard');
-  function renderQuiz(){
-    if(quizIndex >= quizData.length){
-      quizCard.innerHTML = `
-        <div class="quiz-final">
-          <p class="quiz-q">You know us better than you think.</p>
-          <p class="lede" style="margin:0 auto 1.4rem;">Every answer was sweet, jaan &mdash; there was never a wrong one. Onward?</p>
-          <button class="btn btn-plum" id="quizDone">Next chapter &mdash; reasons I love you</button>
-        </div>`;
-      document.getElementById('quizDone').addEventListener('click',()=>goTo(3));
-      return;
-    }
-    const item = quizData[quizIndex];
-    quizCard.innerHTML = `
-      <p class="quiz-progress">Question ${quizIndex+1} of ${quizData.length}</p>
-      <p class="quiz-q">${item.q}</p>
-      <div class="quiz-opts">
-        ${item.opts.map((o,i)=>`<button class="quiz-opt" data-i="${i}">${o}</button>`).join('')}
-      </div>
-      <p class="quiz-feedback" id="quizFeedback">&nbsp;</p>
-      <div class="quiz-next" id="quizNextWrap"><button class="btn btn-plum" id="quizNext">Next question</button></div>
-    `;
-    const opts = Array.from(quizCard.querySelectorAll('.quiz-opt'));
-    const feedback = document.getElementById('quizFeedback');
-    const nextWrap = document.getElementById('quizNextWrap');
-    opts.forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        if(btn.disabled) return;
-        opts.forEach(b=>b.disabled=true);
-        const i = Number(btn.dataset.i);
-        if(i === item.correct){
-          btn.classList.add('correct');
-          feedback.innerHTML = item.yes;
-        }else{
-          btn.classList.add('wrong');
-          opts[item.correct].classList.add('correct');
-          feedback.innerHTML = item.no;
-        }
-        nextWrap.classList.add('show');
-      });
-    });
-    document.getElementById('quizNext').addEventListener('click',()=>{
-      quizIndex++;
-      renderQuiz();
-    });
-  }
-  renderQuiz();
-
-  /* ---------- REASONS flip cards ---------- */
-  const reasons = [
-    "The way you say my name when you're only half awake.",
-    "How you remember tiny details I mentioned only once, weeks ago.",
-    "Your laugh, which has fixed more bad days than I can count.",
-    "The way you stand your ground, gently but firmly, when it matters.",
-    "That you keep choosing me, on our best days and our worst ones.",
-    "How you make an ordinary Tuesday feel like it mattered.",
-    "That being near you feels like the only place I want to be.",
-    "That loving you is the easiest, surest thing I've ever done."
-  ];
-  const cardsGrid = document.getElementById('cardsGrid');
-  reasons.forEach((r,i)=>{
-    const card=document.createElement('div');
-    card.className='flip-card';
-    card.innerHTML = `<div class="flip-inner">
-        <div class="flip-face flip-front">${tulipSVG()}<span>Reason ${i+1}</span></div>
-        <div class="flip-face flip-back"><p>${r}</p></div>
-      </div>`;
-    card.addEventListener('click',()=>card.classList.toggle('flipped'));
-    cardsGrid.appendChild(card);
-  });
-
-  /* ---------- GARDEN ---------- */
-  const meanings = [
-    "For the day we first met &mdash; light purple, like something new and a little enchanting.",
-    "For every small fight we chose to end with 'us' still standing.",
-    "For every quiet call, and every 'I just wanted to hear your voice.'",
-    "For the whole year that somehow went by too fast.",
-    "For the version of me that's calmer, kinder, because of you.",
-    "For everything still ahead of us, InshaAllah."
-  ];
-  const grid = document.getElementById('gardenGrid');
-  const gardenMsg = document.getElementById('gardenMsg');
-  const gardenContinue = document.getElementById('gardenContinue');
-  let bloomed = 0;
-  meanings.forEach((m,i)=>{
-    const plot=document.createElement('div');
-    plot.className='tulip-plot';
-    plot.innerHTML = tulipSVG() + `<span class="plot-label">Tulip ${i+1}</span>`;
-    plot.addEventListener('click',()=>{
-      if(!plot.classList.contains('bloomed')){ plot.classList.add('bloomed'); bloomed++; }
-      gardenMsg.innerHTML = m;
-      if(bloomed >= meanings.length) gardenContinue.classList.add('ready');
-    });
-    grid.appendChild(plot);
-  });
-
-  /* ---------- PROPOSAL: dodging No + fireworks ---------- */
-  const btnRow = document.getElementById('btnRow');
-  const noBtn = document.getElementById('noBtn');
-  const yesBtn = document.getElementById('yesBtn');
-  const result = document.getElementById('proposalResult');
-  let dodges = 0;
-  const dodgeLines = ["Try again? she says.","Nice try. Still asking.","Not that easy, jaan.","I'm patient. Still waiting.","Okay, last chance to say yes."];
-  function dodge(){
-    const rowRect = btnRow.getBoundingClientRect();
-    const btnRect = noBtn.getBoundingClientRect();
-    const maxX = Math.max(0, rowRect.width - btnRect.width - 8);
-    const maxY = 60;
-    const x = (Math.random()*maxX) - (rowRect.width/2 - btnRect.width/2 - 4);
-    const y = (Math.random()*maxY*2) - maxY;
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-    dodges = Math.min(dodges+1, dodgeLines.length-1);
-    result.textContent = dodgeLines[dodges];
-  }
-  noBtn.addEventListener('mouseenter', dodge);
-  noBtn.addEventListener('touchstart', e=>{ e.preventDefault(); dodge(); }, {passive:false});
-  noBtn.addEventListener('click', e=>{ e.preventDefault(); dodge(); });
-
-  yesBtn.addEventListener('click', ()=>{
-    result.textContent = "She said yes. \u2014 InshaAllah, forever starts now.";
-    btnRow.style.pointerEvents='none';
-    noBtn.style.opacity='0';
-    launchFireworks();
-    setTimeout(()=>goTo(7), 2200);
-  });
-
-  const canvas = document.getElementById('fireworks-canvas');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  function resizeCanvas(){
-    const sec = document.getElementById('p6');
-    canvas.width = sec.clientWidth;
-    canvas.height = sec.clientHeight;
-  }
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-  const fwColors = ['#e3c27a','#c9a8e0','#f4ecfa','#e3b7c9','#b28ecf'];
-  function burst(x,y){
-    if(reduced) return;
-    const count = 42;
-    for(let i=0;i<count;i++){
-      const angle = (Math.PI*2*i)/count;
-      const speed = 1.6 + Math.random()*2.6;
-      particles.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:60+Math.random()*20,age:0,color:fwColors[Math.floor(Math.random()*fwColors.length)],size:1.6+Math.random()*1.8});
-    }
-  }
-  let fwRunning=false;
-  function tick(){
-    if(!fwRunning) return;
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{
-      p.age++; p.x+=p.vx; p.y+=p.vy; p.vy+=0.035; p.vx*=0.985;
-      ctx.globalAlpha = Math.max(0,1-p.age/p.life);
-      ctx.fillStyle=p.color; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill();
-    });
-    ctx.globalAlpha=1;
-    particles = particles.filter(p=>p.age<p.life);
-    if(particles.length===0 && !fwSpawning){ fwRunning=false; return; }
-    requestAnimationFrame(tick);
-  }
-  let fwSpawning=false, burstCount=0;
-  function launchFireworks(){
-    if(reduced) return;
-    resizeCanvas(); fwRunning=true; fwSpawning=true; tick();
-    const fwInterval = setInterval(()=>{
-      burst(canvas.width*(0.25+Math.random()*0.5), canvas.height*(0.22+Math.random()*0.32));
-      burstCount++;
-      if(burstCount>7){ clearInterval(fwInterval); fwSpawning=false; }
-    },420);
-  }
-})();
+/* keyboard / swipe */
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'&&current<pages.length-1)go(current+1);if(e.key==='ArrowLeft'&&current>0)go(current-1)});
+let sy=0;document.addEventListener('touchstart',e=>sy=e.touches[0].clientY,{passive:true});
+document.addEventListener('touchend',e=>{let dy=sy-e.changedTouches[0].clientY;if(Math.abs(dy)>70){if(dy>0&&current<pages.length-1)go(current+1);if(dy<0&&current>0)go(current-1)}},{passive:true});
 </script>
 </body>
 </html>
