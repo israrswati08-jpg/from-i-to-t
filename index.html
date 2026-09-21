@@ -121,7 +121,7 @@ p{line-height:1.7}
 /* proposal */
 .proposal{text-align:center;z-index:3}
 .ring{width:170px;height:170px;margin:20px auto;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#fff5ff,#c99aff 42%,transparent 43%);box-shadow:0 0 70px #c07aff;animation:pulse 2s infinite}
-.ring span{font-size:4.5rem;filter:drop-shadow(0 0 15px #fff)}
+.ring span{font-size:4.5rem;filter:drop-shadow(0 0 15px #fff);color:#fff}
 @keyframes pulse{50%{transform:scale(1.06);box-shadow:0 0 100px #d7a6ff}}
 .proposal h2{font-size:clamp(3rem,13vw,5.5rem)}
 .choice{display:flex;justify-content:center;gap:16px;margin-top:25px}
@@ -142,9 +142,34 @@ p{line-height:1.7}
 @keyframes beat{50%{transform:scale(1.15)}}
 .final-buttons{display:flex;gap:10px;justify-content:center;margin-top:25px;flex-wrap:wrap}
 
+
+/* romantic redesign */
+.romantic-card,.letter-card,.proposal-card{text-align:center}
+.romance-wrap{width:min(760px,100%);text-align:center;z-index:2}
+.romance-wrap h2{margin:12px 0 18px}
+.romance-wrap>p{max-width:650px;margin:0 auto 14px}
+.love-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:25px 0 28px}
+.love-card{padding:22px 18px;border-radius:24px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);box-shadow:0 18px 55px rgba(0,0,0,.12);backdrop-filter:blur(10px)}
+.love-card span{font-size:2rem;display:block;margin-bottom:8px;text-shadow:0 0 18px rgba(255,180,230,.7)}
+.love-card h3{margin-bottom:6px}
+.love-card p{font-size:.92rem;opacity:.82}
+.intimate{max-width:700px}
+.intimate-text{font-size:1.45rem;line-height:1.55;opacity:.9}
+.whisper{font:clamp(2rem,7vw,3.5rem) "Great Vibes";margin:25px auto;color:#ffd6ef;text-shadow:0 0 30px rgba(255,145,205,.55)}
+.floating-hearts{font-size:2rem;letter-spacing:.3rem;opacity:.65;margin:20px 0 30px}
+.final-love{max-width:650px;margin:15px auto;font-size:1.35rem;line-height:1.65;opacity:.9}
+.letter-card p{font-size:1.2rem;margin:16px auto;max-width:610px}
+.proposal-card p{max-width:610px;margin:12px auto}
+.page-back{position:absolute;top:18px;left:18px;z-index:30;padding:10px 16px;font-size:.78rem;opacity:.9}
+
 /* responsive */
 @media(max-width:500px){
-  .page{padding:64px 14px 35px}
+  .page{padding:70px 14px 35px}
+  .love-grid{grid-template-columns:1fr}
+  .love-card{padding:19px 16px}
+  .page-back{top:12px;left:12px;padding:9px 13px;font-size:.72rem}
+  .letter-card p{font-size:1.08rem}
+  .intimate-text{font-size:1.25rem}
   .page-back{
     top:12px;
     left:12px;
@@ -166,149 +191,105 @@ p{line-height:1.7}
 <div id="app">
 <div class="transition-curtain" id="transitionCurtain"></div>
 
+
 <section class="page active" id="p0">
-  <div class="stars"></div><div class="moon"></div>
-  <div class="petals" id="petals0"></div>
+  <div class="stars"></div><div class="moon"></div><div class="petals" id="petals0"></div>
   <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
   <div class="hero-copy">
-    <div class="small eyebrow">A little universe, made for two</div>
+    <div class="small eyebrow">For the girl who feels like home</div>
     <h1>Tahira & Israr</h1>
-    <p class="serif" style="font-size:1.45rem">Some stories are written in pages. Ours is written in little moments, quiet smiles, silly conversations, and two hearts that keep choosing each other.</p>
-    <button class="btn" onclick="go(1)">Open Our Story ♡</button>
-    <div class="scroll">tap to begin · slowly · softly</div>
+    <p class="serif" style="font-size:1.5rem">I don't need a thousand reasons to love you. I just need one moment with you to remember why my heart chose you.</p>
+    <button class="btn pink" onclick="go(1)">Come closer, my love ♡</button>
+    <div class="scroll">a little journey for you</div>
   </div>
 </section>
 
 <section class="page light" id="p1">
+  <div class="petals" id="petals1"></div>
   <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
- <div class="petals" id="petals1"></div>
- <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
- <div class="card storyline">
-   <div class="small">Chapter one</div>
-   <h2>Somehow, You Became Home</h2>
-   <p>There is a beautiful kind of love that doesn't need a grand entrance. It arrives through conversations, laughter, tiny updates, comfortable silence, and the feeling that you can finally be completely yourself.</p>
-   <p>That is what you became to me, Tahira. Not simply someone I love, but someone whose presence makes ordinary days feel softer.</p>
-   <div class="quote">“If my heart had a favorite place, it would be wherever you are.”</div>
-   <button class="btn pink" onclick="go(2)">Turn the page →</button>
- </div>
+  <div class="card romantic-card">
+    <div class="small">If I could hold you right now</div>
+    <h2>I Wouldn't Let Go So Quickly</h2>
+    <p>I'd pull you gently into my arms, let you rest your head against my chest, and stay there with you until the whole world became quiet.</p>
+    <p>I'd kiss your forehead softly. Then your cheek. And probably smile when you tell me I'm being too sweet.</p>
+    <div class="quote">“Somewhere between your smile and your voice, my heart found its favorite place.”</div>
+    <button class="btn pink" onclick="go(2)">Stay with me a little longer →</button>
+  </div>
 </section>
 
-<section class="page light" id="p2">
+<section class="page" id="p2">
+  <div class="stars"></div><div class="petals" id="petals2"></div>
   <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
- <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
- <div class="card">
-   <div class="small">The little things</div><h2>Our Kind of Magic</h2>
-   <div class="timeline">
-    <div class="memory"><div class="ico">☾</div><div><strong>Late conversations</strong><p>When “just five minutes” somehow becomes a whole world of stories.</p></div></div>
-    <div class="memory"><div class="ico">♡</div><div><strong>Little updates</strong><p>The tiny details that seem small to everyone else, but mean everything to us.</p></div></div>
-    <div class="memory"><div class="ico">☀</div><div><strong>Making up after storms</strong><p>We may disagree, but our love keeps reminding us that understanding matters more than winning.</p></div></div>
-    <div class="memory"><div class="ico">✦</div><div><strong>Choosing each other</strong><p>Again and again. In laughter, in silence, in imperfect moments and beautiful ones.</p></div></div>
-   </div>
-   <button class="btn pink" onclick="go(3)">A tiny challenge →</button>
- </div>
+  <div class="romance-wrap">
+    <div class="small">Things I want to give you</div>
+    <h2>A Love That Feels Safe</h2>
+    <div class="love-grid">
+      <div class="love-card"><span>♡</span><h3>Warm hugs</h3><p>The kind where you forget what you were worried about.</p></div>
+      <div class="love-card"><span>✦</span><h3>Soft kisses</h3><p>Forehead kisses, cheek kisses, and kisses just because I missed you.</p></div>
+      <div class="love-card"><span>☾</span><h3>Late nights</h3><p>Quiet conversations, sleepy smiles, and “don't hang up yet.”</p></div>
+      <div class="love-card"><span>∞</span><h3>My presence</h3><p>On easy days, hard days, and every ordinary day between them.</p></div>
+    </div>
+    <button class="btn pink" onclick="go(3)">Let me tell you what you mean to me →</button>
+  </div>
 </section>
 
-<section class="page" id="p3">
+<section class="page light" id="p3">
+  <div class="petals" id="petals3"></div>
   <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
- <div class="stars"></div><div class="petals" id="petals3"></div>
- <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
- <div class="puzzle-wrap">
-   <div class="small">Love puzzle</div><h2>Put Our Heart Together</h2>
-   <p style="margin-top:10px;opacity:.8">Tap neighboring pieces to move them. Make the heart complete.</p>
-   <div class="puzzle" id="puzzle"></div>
-   <div id="puzzleMsg">A little patience, my love… ♡</div>
-   <button class="btn outline" onclick="shufflePuzzle()">Shuffle Again</button>
-   <button class="btn" style="margin-top:10px" onclick="go(4)">Continue →</button>
- </div>
+  <div class="card letter-card">
+    <div class="small">A little truth from my heart</div>
+    <h2>You Are More Than Someone I Love</h2>
+    <p>You're the person I want to tell everything to — the silly things, the beautiful things, the things that keep me awake at night.</p>
+    <p>You're the smile I want to see after a long day. The hand I want to hold when we're walking. The shoulder I want to lean on when words aren't enough.</p>
+    <p>And when I imagine the future, I don't imagine perfection. I imagine <strong>us</strong>: laughing in the kitchen, teasing each other, making up after little arguments, sharing quiet mornings, and finding new reasons to fall in love again.</p>
+    <div class="quote">“I don't want just the beautiful moments. I want all of them — with you.”</div>
+    <button class="btn pink" onclick="go(4)">One more secret from my heart →</button>
+  </div>
 </section>
 
-<section class="page light" id="p4">
+<section class="page" id="p4">
+  <div class="stars"></div><div class="petals" id="petals4"></div>
   <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
- <div class="petals" id="petals4"></div>
- <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
- <div class="quiz card">
-   <div class="small">A playful test</div><h2 style="text-align:center">How Well Do You Know My Heart?</h2>
-   <div id="quizArea"></div>
- </div>
+  <div class="romance-wrap intimate">
+    <div class="small">If you were beside me tonight</div>
+    <h2>I'd Just Hold You</h2>
+    <p class="serif intimate-text">No big speech. No perfect words.</p>
+    <p class="serif intimate-text">Just my arms around you, your head on my shoulder, my fingers gently holding yours, and a soft kiss on your forehead before I whisper...</p>
+    <div class="whisper">“I'm so grateful you're mine to love.”</div>
+    <div class="floating-hearts">♡ &nbsp; ♡ &nbsp; ♡</div>
+    <button class="btn pink" onclick="go(5)">Come a little closer →</button>
+  </div>
 </section>
 
 <section class="page light" id="p5">
+  <div class="petals" id="petals5"></div>
   <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
- <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
- <div class="card" style="text-align:center">
-   <div class="small">A garden of meanings</div><h2>For My Purple Tulip</h2>
-   <p style="margin:12px 0">Every tulip below carries a little promise. Tap one and let it bloom.</p>
-   <div class="garden" id="garden">
-    <div class="ground"></div>
-   </div>
-   <div class="tulip-info" id="tulipInfo"><span class="meaning">Purple · admiration</span><span class="meaning">Pink · affection</span><span class="meaning">White · sincerity</span><span class="meaning">Red · devotion</span><span class="meaning">Yellow · sunshine</span></div>
-   <button class="btn pink" style="margin-top:22px" onclick="go(6)">Walk a little further →</button>
- </div>
+  <div class="card proposal-card">
+    <div class="small">The promise I want to make</div>
+    <div class="ring"><span>♡</span></div>
+    <h2>Let Me Keep Choosing You</h2>
+    <p>I want to be the person who makes you feel loved, wanted, respected, protected, and never alone.</p>
+    <p>I want to hold your hand through the ordinary days and pull you close on the days when the world feels heavy.</p>
+    <p class="serif" style="font-size:1.45rem">If you let me, I'll keep giving you reasons to smile.</p>
+    <button class="btn pink" onclick="sayYes()">Yes, keep me close ♡</button>
+  </div>
 </section>
 
 <section class="page" id="p6">
+  <div class="stars"></div><div class="fireworks" id="fireworks"></div><div class="petals" id="petals6"></div>
   <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
- <div class="stars"></div><div class="petals" id="petals6"></div>
- <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
- <div class="proposal">
-   <div class="small">A question from my heart</div>
-   <div class="ring"><span>💍</span></div>
-   <h2>Will You Be My Forever?</h2>
-   <p style="max-width:520px;margin:15px auto;opacity:.85">Not because every day will be perfect, but because I want to build the imperfect, beautiful, ordinary, extraordinary days with you.</p>
-   <div class="choice">
-     <button class="btn pink" onclick="sayYes()">Yes, my love ♡</button>
-     <button class="btn outline" id="noBtn" onmouseenter="runAway()" onclick="runAway()">Let me think…</button>
-   </div>
- </div>
-</section>
-
-<section class="page" id="p7">
-  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
- <div class="stars"></div><div class="fireworks" id="fireworks"></div>
- <div class="petals" id="petals7"></div>
- <div class="celebrate">
-   <div class="big-heart">♡</div>
-   <div class="small">The answer my heart was waiting for</div>
-   <h1>You Said Yes!</h1>
-   <p class="serif" style="font-size:1.45rem;max-width:600px;margin:10px auto">Then let this little celebration be the beginning of a thousand more celebrations — with laughter, prayers, adventures, family, dreams and a lifetime of choosing each other.</p>
-   <div class="final-buttons"><button class="btn" onclick="go(8)">Read My Letter →</button></div>
- </div>
-</section>
-
-<section class="page light" id="p8">
-  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
- <div class="petals" id="petals8"></div>
- <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
- <article class="letter">
-   <div class="small" style="text-align:center">A letter I hope you keep</div>
-   <h2>For Tahira, My Beautiful Soul</h2>
-   <p>My love,</p>
-   <p>There are feelings so deep that ordinary sentences feel too small for them. Still, I want to try, because you deserve to know how precious you are to me.</p>
-   <p>You have become one of the gentlest parts of my world. Your voice can turn a difficult day quiet. Your smile can make a simple moment feel special. Even the smallest things we share have found a permanent little corner inside my heart.</p>
-   <p>I don't promise a life without misunderstandings. I promise something more real: that when the clouds arrive, I will choose conversation over silence, understanding over pride, forgiveness over keeping score, and us over the argument.</p>
-   <p>I want to see your dreams become real. I want to celebrate your wins, protect your peace, make you laugh when the day is heavy, and stand beside you when life asks us to be brave.</p>
-   <p>InshaAllah, if life opens that beautiful door for us, I want our future to be full of dua, family, travel, late-night conversations, a home filled with warmth, and countless ordinary mornings that become precious simply because you are there.</p>
-   <p>You are my favorite person to tell things to. My safe place. My happiness in the small moments. My beautiful purple tulip in a garden I never knew my heart was waiting for.</p>
-   <p>And if I ever fail to say it enough: <strong>I choose you with a full heart.</strong></p>
-   <p>Always yours, always cheering for you, always grateful that our paths crossed.</p>
-   <div class="signature">Israr ♡</div>
- </article>
- <button class="btn pink" style="margin-top:25px;z-index:3" onclick="go(9)">One last little surprise →</button>
-</section>
-
-<section class="page" id="p9">
-  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
- <div class="stars"></div><div class="petals" id="petals9"></div>
- <div class="celebrate">
-   <div class="small">Our little promise</div>
-   <h1 style="font-size:clamp(3.5rem,16vw,7rem)">Tahira,<br>Let's Grow Together.</h1>
-   <p class="serif" style="font-size:1.5rem;max-width:620px;margin:20px auto">May we keep finding reasons to laugh, reasons to forgive, reasons to hold hands, and reasons to thank Allah for every beautiful chapter ahead.</p>
-   <div class="final-buttons">
-     <button class="btn" onclick="createHearts()">Send a thousand hearts ♡</button>
-     <button class="btn outline" onclick="go(0)">Read it all again ↺</button>
-   </div>
-   <p id="heartMessage" class="script" style="font-size:2rem;margin-top:25px;min-height:45px"></p>
- </div>
+  <div class="celebrate">
+    <div class="big-heart">♡</div>
+    <div class="small">For my beautiful Tahira</div>
+    <h1>Always You.</h1>
+    <p class="serif final-love">If I could give you one thing for the rest of our lives, it would be the feeling of being loved every single day.</p>
+    <p class="serif final-love">Come here, my love. Let me hug you a little longer. Let me kiss your forehead. Let me remind you that you are precious to me.</p>
+    <div class="final-buttons">
+      <button class="btn pink" onclick="createHearts()">A thousand kisses & hearts ♡</button>
+      <button class="btn outline" onclick="go(0)">Read it again ↺</button>
+    </div>
+    <p id="heartMessage" class="script" style="font-size:2rem;margin-top:25px;min-height:45px"></p>
+  </div>
 </section>
 
 <div class="progress" id="progress"></div>
@@ -327,142 +308,77 @@ document.addEventListener('touchend', e => {
   delete document.body.dataset.touchStartY;
 }, {passive:true});
 
+
 const pages=[...document.querySelectorAll('.page')];
 let current=0;
 const progress=document.getElementById('progress');
 pages.forEach((_,i)=>{const d=document.createElement('i');progress.appendChild(d)});
 let changing=false;
+
 function go(n){
- if(changing || n===current || n<0 || n>=pages.length) return;
- changing=true;
- const oldPage=pages[current], newPage=pages[n], curtain=document.getElementById('transitionCurtain');
+  if(changing || n===current || n<0 || n>=pages.length) return;
+  changing=true;
+  const oldPage=pages[current], newPage=pages[n];
+  const curtain=document.getElementById('transitionCurtain');
 
- oldPage.classList.add('leaving');
- curtain.classList.remove('play');
- void curtain.offsetWidth;
- curtain.classList.add('play');
+  oldPage.classList.add('leaving');
+  curtain.classList.remove('play');
+  void curtain.offsetWidth;
+  curtain.classList.add('play');
 
- setTimeout(()=>{
-   oldPage.classList.remove('active','leaving');
-   newPage.classList.add('active');
-   current=n;
-   [...progress.children].forEach((d,i)=>d.classList.toggle('on',i===n));
-   window.scrollTo(0,0);
-
-   if(n===3) initPuzzle();
-   if(n===4) initQuiz();
-   if(n===5) initGarden();
-   if(n===7) launchFireworks();
-
-   setTimeout(()=>{changing=false},420);
- },360);
+  setTimeout(()=>{
+    oldPage.classList.remove('active','leaving');
+    newPage.classList.add('active');
+    current=n;
+    [...progress.children].forEach((d,i)=>d.classList.toggle('on',i===n));
+    window.scrollTo({top:0,behavior:'instant'});
+    if(n===6) launchFireworks();
+    setTimeout(()=>{changing=false},420);
+  },360);
 }
-current=0;
+
 [...progress.children].forEach((d,i)=>d.classList.toggle('on',i===0));
 
-/* petals */
-function makePetals(id,count=24){
- const el=document.getElementById(id); if(!el||el.dataset.ready)return;
- el.dataset.ready=1;
- for(let i=0;i<count;i++){
-  const p=document.createElement('span');p.className='petal';
-  p.style.left=Math.random()*100+'%';
-  p.style.animationDuration=(7+Math.random()*8)+'s';
-  p.style.animationDelay=(-Math.random()*12)+'s';
-  p.style.transform=`rotate(${Math.random()*180}deg)`;
-  el.appendChild(p);
- }
-}
-['petals0','petals1','petals3','petals4','petals6','petals7','petals8','petals9'].forEach(x=>makePetals(x));
-
-/* puzzle */
-let puzzle=[1,2,3,4,5,6,7,8,0];
-function shufflePuzzle(){
- do{puzzle.sort(()=>Math.random()-.5)}while(!solvable(puzzle)||isSolved());
- renderPuzzle();
-}
-function solvable(a){let inv=0;for(let i=0;i<8;i++)for(let j=i+1;j<9;j++)if(a[i]&&a[j]&&a[i]>a[j])inv++;return inv%2===0}
-function isSolved(){return puzzle.every((v,i)=>v===i+1||(i===8&&v===0))}
-function renderPuzzle(){
- const el=document.getElementById('puzzle');el.innerHTML='';
- puzzle.forEach((v,i)=>{
-  const b=document.createElement('button');b.className='tile'+(!v?' empty':'');
-  b.textContent=v?['✦','♡','✧','❀','♥','✿','☾','∞'][v-1]:'';
-  b.onclick=()=>moveTile(i);el.appendChild(b);
- });
-}
-function moveTile(i){
- const z=puzzle.indexOf(0),r=Math.floor(i/3),c=i%3,rz=Math.floor(z/3),cz=z%3;
- if(Math.abs(r-rz)+Math.abs(c-cz)===1){[puzzle[i],puzzle[z]]=[puzzle[z],puzzle[i]];renderPuzzle();
- if(isSolved()){document.getElementById('puzzleMsg').textContent='You found it. Just like us — every piece belongs. ♡';}}
-}
-function initPuzzle(){if(!document.getElementById('puzzle').children.length){shufflePuzzle()}}
-
-/* quiz */
-const qs=[
- ["What is my favorite flower for you?","Purple tulips",["Purple tulips","Roses","Sunflowers","Daisies"]],
- ["What matters most after a little disagreement?","Understanding each other",["Winning the argument","Being silent","Understanding each other","Keeping score"]],
- ["What do I want our future to feel like?","A peaceful home full of love",["A perfect movie","A peaceful home full of love","A life without challenges","A life without surprises"]]
-];
-let qi=0,score=0;
-function initQuiz(){qi=0;score=0;drawQ()}
-function drawQ(){
- const area=document.getElementById('quizArea');
- if(qi>=qs.length){area.innerHTML=`<div style="text-align:center;padding:20px"><div class="big-heart">♡</div><h3>You scored ${score}/${qs.length}</h3><p style="margin:10px 0 20px">No score can measure us. I just love that you know the little corners of my heart.</p><button class="btn pink" onclick="go(5)">Go to our garden →</button></div>`;return}
- const q=qs[qi]; area.innerHTML=`<div class="question">${q[0]}</div><div class="answers">${q[2].map((a,i)=>`<button class="answer" onclick="answer(${i},this)">${a}</button>`).join('')}</div><div class="quiz-score">${qi+1} / ${qs.length}</div>`;
-}
-function answer(i,el){
- const q=qs[qi];[...el.parentElement.children].forEach(x=>x.disabled=true);
- if(q[2][i]===q[1]){el.classList.add('correct');score++}else{el.classList.add('wrong');[...el.parentElement.children].find(x=>x.textContent===q[1]).classList.add('correct')}
- setTimeout(()=>{qi++;drawQ()},650)
+function sayYes(){
+  go(6);
 }
 
-/* tulips */
-function initGarden(){
- const g=document.getElementById('garden'); if(g.dataset.ready)return;g.dataset.ready=1;
- const meanings=["admiration","tenderness","sincerity","devotion","sunshine","a beautiful future","patience","home"];
- meanings.forEach((m,i)=>{
-  const t=document.createElement('div');t.className='tulip';t.style.left=(5+i*12+Math.random()*4)+'%';t.style.animationDelay=(-Math.random()*2)+'s';
-  t.innerHTML=`<div class="bloom"></div><div class="stem"></div><div class="leaf l"></div><div class="leaf r"></div>`;
-  t.onclick=()=>{document.getElementById('tulipInfo').innerHTML=`<span class="meaning">This tulip means: <strong>${m}</strong> ♡</span>`; t.animate([{transform:'scale(1)'},{transform:'scale(1.25)'},{transform:'scale(1)'}],{duration:500})};
-  g.appendChild(t);
- })
-}
-
-/* playful no button */
-function runAway(){
- const b=document.getElementById('noBtn');
- b.style.position='fixed';
- b.style.left=(10+Math.random()*70)+'%';
- b.style.top=(15+Math.random()*70)+'%';
- b.textContent=['Maybe…','Are you sure?','Think again ♡','No escape!','Try the other one →'][Math.floor(Math.random()*5)];
-}
-
-/* yes celebration */
-function sayYes(){go(7)}
 function launchFireworks(){
- const f=document.getElementById('fireworks');f.innerHTML='';
- for(let i=0;i<13;i++){
-  const x=document.createElement('span');x.className='firework';
-  x.style.left=(8+Math.random()*84)+'%';x.style.top=(10+Math.random()*70)+'%';
-  x.style.animationDelay=(Math.random()*1.8)+'s';f.appendChild(x);
- }
+  const f=document.getElementById('fireworks');
+  f.innerHTML='';
+  for(let i=0;i<18;i++){
+    const x=document.createElement('span');
+    x.className='firework';
+    x.style.left=(8+Math.random()*84)+'%';
+    x.style.top=(10+Math.random()*70)+'%';
+    x.style.animationDelay=(Math.random()*1.8)+'s';
+    f.appendChild(x);
+  }
 }
-function createHearts(){
- const msg=document.getElementById('heartMessage');msg.textContent="A thousand hearts, and somehow they still wouldn't be enough. ♡";
- for(let i=0;i<28;i++){
-  const h=document.createElement('div');h.className='heart';
-  h.style.left=Math.random()*100+'%';h.style.top=(40+Math.random()*55)+'%';
-  h.style.position='fixed';h.style.zIndex=99;h.style.animation=`rise ${2+Math.random()*2}s ease-out forwards`;
-  document.body.appendChild(h);setTimeout(()=>h.remove(),4000);
- }
-}
-const st=document.createElement('style');st.textContent='@keyframes rise{to{transform:translateY(-100vh) rotate(360deg) scale(.3);opacity:0}}';document.head.appendChild(st);
 
-/* Navigation is intentionally button-only.
-   Next = the existing buttons inside each page.
-   Previous = the fixed "Previous" button on pages 2–10.
-   Scrolling/swiping on mobile never changes the page. */
+function createHearts(){
+  const msg=document.getElementById('heartMessage');
+  msg.textContent="A thousand hearts, a thousand kisses… and I'd still want one more. ♡";
+  for(let i=0;i<42;i++){
+    const h=document.createElement('div');
+    h.className='heart';
+    h.style.left=Math.random()*100+'%';
+    h.style.top=(35+Math.random()*55)+'%';
+    h.style.position='fixed';
+    h.style.zIndex=99;
+    h.style.animation=`rise ${2+Math.random()*2}s ease-out forwards`;
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4000);
+  }
+}
+
+const st=document.createElement('style');
+st.textContent='@keyframes rise{to{transform:translateY(-100vh) rotate(360deg) scale(.3);opacity:0}}';
+document.head.appendChild(st);
+
+/* Navigation is button-only.
+   Scrolling/swiping never changes pages.
+   Next and Previous buttons control the story. */
 </script>
 </body>
 </html>
