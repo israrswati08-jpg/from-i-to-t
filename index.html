@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<title>Israr &amp; Tahira</title>
+<title>Israr &amp; Tahira &mdash; Our Story</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -22,402 +22,436 @@
     --ink-soft:#6a5980;
     --rose:#e3b7c9;
     --shadow-tulip:#8a5eb0;
+    --stem:#5c8a4a;
+    --stem-deep:#3f6a34;
   }
   *,*::before,*::after{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html,body{height:100%;}
   body{
     margin:0;
     font-family:'Jost',sans-serif;
     background:var(--night-deep);
     color:var(--ink);
-    overflow-x:hidden;
+    overflow:hidden;
     -webkit-tap-highlight-color:transparent;
   }
   h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;}
-  section{
-    position:relative;
-    min-height:100svh;
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding:calc(env(safe-area-inset-top,0px) + 2.2rem) 1.4rem calc(env(safe-area-inset-bottom,0px) + 2.2rem);
-    text-align:center;
-    overflow:hidden;
-  }
-  .reveal{
-    opacity:0;
-    transform:translateY(26px);
-    transition:opacity 1s ease, transform 1s ease;
-  }
-  .reveal.visible{opacity:1;transform:translateY(0);}
   @media (prefers-reduced-motion:reduce){
-    .reveal{opacity:1;transform:none;transition:none;}
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important;}
+    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
   }
 
-  /* ---------- petals / background ---------- */
-  .petal-field{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;}
+  /* =============== APP SHELL / BOOK =============== */
+  #app{position:fixed;inset:0;overflow:hidden;}
+  #book{position:absolute;inset:0;perspective:1500px;}
+  .page{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:calc(env(safe-area-inset-top,0px) + 1.6rem) 1.3rem calc(env(safe-area-inset-bottom,0px) + 5.4rem);
+    text-align:center;overflow-y:auto;overflow-x:hidden;
+    transform-style:preserve-3d;
+    transition:transform .85s cubic-bezier(.4,0,.2,1), opacity .6s ease;
+    -webkit-overflow-scrolling:touch;
+  }
+  .page.is-active{transform:none;opacity:1;z-index:5;pointer-events:auto;}
+  .page.is-prev{transform:rotateY(-32deg) translateZ(-160px) translateX(-4%) scale(.88);opacity:0;z-index:1;pointer-events:none;}
+  .page.is-next{transform:rotateY(32deg) translateZ(-160px) translateX(4%) scale(.88);opacity:0;z-index:1;pointer-events:none;}
+
+  .page-label{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;
+    color:var(--label-color,var(--shadow-tulip));opacity:.8;margin:0 0 .3rem;
+  }
+  .page-heading{font-size:clamp(1.9rem,7vw,2.7rem);margin:0 0 .9rem;font-weight:500;color:var(--heading-color,var(--plum));}
+  .page-heading em{font-style:italic;color:var(--shadow-tulip);}
+  .lede{max-width:58ch;font-size:clamp(.98rem,2.6vw,1.1rem);line-height:1.85;color:var(--ink-soft);font-weight:300;}
+  .lede + .lede{margin-top:1rem;}
+
+  .paper{background:linear-gradient(180deg,var(--lilac-pale),var(--paper));}
+  .night{background:radial-gradient(ellipse at 50% 16%,#4a2a68 0,transparent 55%),linear-gradient(180deg,var(--night-deep) 0%,var(--night-mid) 55%,var(--plum) 100%);}
+  .night *{color:var(--paper);}
+  .night .lede{color:var(--lilac-soft);}
+
+  /* =============== NAV =============== */
+  #pageNav{
+    position:fixed;left:0;right:0;bottom:0;z-index:20;
+    display:flex;align-items:center;justify-content:space-between;gap:.8rem;
+    padding:.7rem 1rem calc(env(safe-area-inset-bottom,0px) + .8rem);
+    background:linear-gradient(0deg,rgba(20,10,32,.92),rgba(20,10,32,.0));
+  }
+  .nav-arrow{
+    appearance:none;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.06);
+    color:var(--lilac-soft);width:40px;height:40px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex:none;cursor:pointer;
+    transition:background .25s ease, transform .2s ease;
+  }
+  .nav-arrow:active{transform:scale(.9);}
+  .nav-arrow:disabled{opacity:.25;pointer-events:none;}
+  .nav-arrow svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  #dots{display:flex;gap:.4rem;flex:1;justify-content:center;flex-wrap:nowrap;}
+  .dot{
+    width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);
+    border:none;padding:0;cursor:pointer;transition:background .3s ease, transform .3s ease;flex:none;
+  }
+  .dot.on{background:var(--gold-soft);transform:scale(1.5);}
+
+  /* =============== GLOBAL PETALS =============== */
+  #globalPetals{position:fixed;inset:0;pointer-events:none;z-index:10;overflow:hidden;}
   .petal{
-    position:absolute;top:-8%;
-    width:14px;height:16px;
+    position:absolute;top:-8%;width:13px;height:15px;
     background:linear-gradient(160deg,var(--lilac),var(--shadow-tulip));
-    border-radius:60% 10% 60% 10%;
-    opacity:.85;
-    animation:fall linear infinite;
-    filter:drop-shadow(0 2px 3px rgba(0,0,0,.15));
+    border-radius:60% 10% 60% 10%;opacity:.8;animation:fall linear infinite;
+    filter:drop-shadow(0 2px 3px rgba(0,0,0,.18));
   }
-  @keyframes fall{
-    0%{transform:translateY(0) translateX(0) rotate(0deg);}
-    100%{transform:translateY(115vh) translateX(var(--drift,30px)) rotate(340deg);}
-  }
+  @keyframes fall{0%{transform:translateY(0) translateX(0) rotate(0deg);}100%{transform:translateY(120vh) translateX(var(--drift,30px)) rotate(360deg);}}
 
-  /* ---------- HERO ---------- */
-  #hero{
-    background:
-      radial-gradient(ellipse at 50% 18%, #4a2a68 0%, transparent 55%),
-      linear-gradient(180deg,var(--night-deep) 0%, var(--night-mid) 55%, var(--plum) 100%);
-  }
+  /* =============== COVER =============== */
   .stars{position:absolute;inset:0;z-index:0;}
   .star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.7;animation:twinkle 3s ease-in-out infinite;}
   @keyframes twinkle{0%,100%{opacity:.15;}50%{opacity:.9;}}
-  .hero-inner{position:relative;z-index:2;max-width:640px;}
-  .kicker-names{
-    font-family:'Cormorant Garamond',serif;
-    font-style:italic;
-    font-size:clamp(1.05rem,4vw,1.3rem);
-    color:var(--lilac-soft);
-    letter-spacing:.02em;
-    margin:0 0 .6rem;
-  }
-  .hero-title{
-    font-size:clamp(2.6rem,10vw,4.6rem);
-    line-height:1.02;
-    margin:0 0 1.1rem;
-    color:var(--paper);
-    font-weight:500;
-  }
+  .cover-3d{position:relative;z-index:2;perspective:900px;}
+  .cover-bouquet{display:flex;justify-content:center;gap:6px;margin-bottom:1rem;transform-style:preserve-3d;}
+  .cover-bouquet svg{width:34px;animation:tulipFloat 4.5s ease-in-out infinite;}
+  .kicker-names{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.05rem,4vw,1.3rem);color:var(--lilac-soft);margin:0 0 .5rem;}
+  .hero-title{font-size:clamp(2.5rem,10vw,4.4rem);line-height:1.03;margin:0 0 1rem;color:var(--paper);font-weight:500;}
   .hero-title em{font-style:italic;color:var(--gold-soft);}
-  .hero-sub{
-    color:var(--lilac-soft);
-    font-size:clamp(.95rem,3vw,1.1rem);
-    line-height:1.7;
-    max-width:34ch;
-    margin:0 auto 2.4rem;
-    font-weight:300;
+  .hero-sub{color:var(--lilac-soft);font-size:clamp(.95rem,3vw,1.08rem);line-height:1.75;max-width:36ch;margin:0 auto 2.1rem;font-weight:300;}
+  .btn{
+    appearance:none;border:1px solid var(--gold-soft);background:transparent;color:var(--gold-soft);
+    font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;
+    padding:.8rem 2.1rem;border-radius:999px;cursor:pointer;transition:background .35s ease,color .35s ease,transform .2s ease;
   }
-  .enter-btn{
-    appearance:none;border:1px solid var(--gold-soft);
-    background:transparent;color:var(--gold-soft);
-    font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;
-    padding:.85rem 2.3rem;border-radius:999px;cursor:pointer;
-    letter-spacing:.02em;
-    transition:background .4s ease,color .4s ease,transform .3s ease;
-  }
-  .enter-btn:active{transform:scale(.96);}
-  .enter-btn:hover{background:var(--gold-soft);color:var(--night-deep);}
-  .scroll-hint{
-    position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 1.3rem);
-    left:0;right:0;margin:auto;
-    width:1px;height:34px;background:linear-gradient(var(--lilac-soft),transparent);
-    animation:hintPulse 2s ease-in-out infinite;
-  }
-  @keyframes hintPulse{0%,100%{opacity:.2;}50%{opacity:.9;}}
+  .btn:active{transform:scale(.95);}
+  .btn:hover{background:var(--gold-soft);color:var(--night-deep);}
+  .btn-solid{background:var(--gold-soft);color:var(--night-deep);}
+  .btn-solid:hover{background:var(--gold);}
+  .btn-plum{border-color:var(--shadow-tulip);color:var(--plum);}
+  .btn-plum:hover{background:var(--shadow-tulip);color:#fff;}
 
-  /* ---------- SECTION shared paper look ---------- */
-  .paper-section{background:linear-gradient(180deg,var(--lilac-pale),var(--paper));}
-  .eyebrow-mark{
-    width:34px;height:34px;margin:0 auto 1.1rem;
-    opacity:.85;
-  }
-  .section-title{
-    font-size:clamp(2rem,6vw,2.9rem);
-    color:var(--plum);
-    margin:0 0 1rem;
-    font-weight:500;
-  }
-  .section-title em{font-style:italic;color:var(--shadow-tulip);}
-  .lede{
-    max-width:60ch;
-    font-size:clamp(1rem,2.6vw,1.15rem);
-    line-height:1.85;
-    color:var(--ink-soft);
-    font-weight:300;
-  }
-  .lede + .lede{margin-top:1.1rem;}
+  /* =============== TIMELINE =============== */
+  .timeline{display:flex;flex-direction:column;gap:1.3rem;max-width:520px;width:100%;margin-top:1.8rem;text-align:left;}
+  .t-row{display:flex;gap:1rem;align-items:flex-start;opacity:0;transform:translateX(-14px);animation:tIn .7s ease forwards;}
+  .t-row:nth-child(1){animation-delay:.05s;} .t-row:nth-child(2){animation-delay:.18s;}
+  .t-row:nth-child(3){animation-delay:.31s;} .t-row:nth-child(4){animation-delay:.44s;}
+  .t-row:nth-child(5){animation-delay:.57s;} .t-row:nth-child(6){animation-delay:.7s;}
+  @keyframes tIn{to{opacity:1;transform:none;}}
+  .t-dot{flex:none;width:10px;height:10px;margin-top:.4rem;border-radius:50%;background:var(--shadow-tulip);box-shadow:0 0 0 4px var(--lilac-soft);}
+  .t-row p{margin:0;color:var(--ink-soft);font-size:.96rem;line-height:1.75;font-weight:300;}
+  .t-row strong{color:var(--plum);font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.05rem;}
 
-  /* ---------- STORY timeline ---------- */
-  .timeline{
-    display:flex;flex-direction:column;gap:1.6rem;
-    max-width:520px;width:100%;margin-top:2.2rem;text-align:left;
+  /* =============== QUIZ =============== */
+  .quiz-card{max-width:460px;width:100%;margin-top:1rem;}
+  .quiz-progress{font-size:.8rem;color:var(--ink-soft);letter-spacing:.03em;margin-bottom:.6rem;}
+  .quiz-q{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--plum);margin:0 0 1.1rem;font-weight:600;}
+  .quiz-opts{display:flex;flex-direction:column;gap:.65rem;}
+  .quiz-opt{
+    appearance:none;text-align:left;border:1px solid rgba(90,51,120,.25);background:rgba(255,255,255,.55);
+    color:var(--ink);padding:.75rem 1rem;border-radius:14px;font-size:.95rem;cursor:pointer;font-family:'Jost',sans-serif;
+    transition:background .25s ease, border-color .25s ease, transform .15s ease;
   }
-  .t-row{display:flex;gap:1rem;align-items:flex-start;}
-  .t-dot{
-    flex:none;width:11px;height:11px;margin-top:.4rem;border-radius:50%;
-    background:var(--shadow-tulip);box-shadow:0 0 0 4px var(--lilac-soft);
+  .quiz-opt:active{transform:scale(.98);}
+  .quiz-opt.correct{background:rgba(201,168,224,.55);border-color:var(--shadow-tulip);}
+  .quiz-opt.wrong{background:rgba(227,183,201,.4);border-color:var(--rose);}
+  .quiz-opt[disabled]{cursor:default;}
+  .quiz-feedback{
+    margin-top:1rem;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--plum);
+    font-size:1.08rem;line-height:1.6;min-height:1.4rem;
   }
-  .t-row p{margin:0;color:var(--ink-soft);font-size:.98rem;line-height:1.75;font-weight:300;}
-  .t-row strong{color:var(--plum);font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.08rem;}
+  .quiz-next{margin-top:1.3rem;opacity:0;pointer-events:none;transition:opacity .4s ease;}
+  .quiz-next.show{opacity:1;pointer-events:auto;}
+  .quiz-final{max-width:440px;}
 
-  /* ---------- GARDEN ---------- */
-  #garden{background:linear-gradient(180deg,var(--paper) 0%, var(--lilac-pale) 100%);}
-  .garden-grid{
-    display:grid;grid-template-columns:repeat(3,1fr);
-    gap:1.1rem;max-width:420px;width:100%;margin:2rem auto 1.4rem;
+  /* =============== FLIP CARDS (reasons) =============== */
+  .cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem;max-width:460px;width:100%;margin-top:1.6rem;}
+  .flip-card{aspect-ratio:1/1.05;perspective:1000px;cursor:pointer;-webkit-user-select:none;user-select:none;}
+  .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.4,0,.2,1);}
+  .flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+  .flip-face{
+    position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:.7rem;box-shadow:0 10px 22px -14px rgba(90,51,120,.5);
   }
+  .flip-front{background:linear-gradient(160deg,var(--lilac-soft),var(--paper));border:1px solid rgba(90,51,120,.18);}
+  .flip-front span{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--shadow-tulip);font-size:.82rem;margin-top:.35rem;}
+  .flip-back{background:linear-gradient(160deg,var(--shadow-tulip),var(--plum));transform:rotateY(180deg);}
+  .flip-back p{color:var(--paper);font-family:'Cormorant Garamond',serif;font-size:.92rem;line-height:1.5;font-style:italic;margin:0;}
+
+  /* =============== GARDEN =============== */
+  .garden-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;max-width:440px;width:100%;margin:1.7rem auto 1.2rem;}
   .tulip-plot{
-    background:rgba(255,255,255,.5);
-    border:1px solid rgba(90,51,120,.15);
-    border-radius:18px;
-    padding:.7rem .4rem 1rem;
-    display:flex;flex-direction:column;align-items:center;
-    cursor:pointer;
-    -webkit-user-select:none;user-select:none;
-    transition:background .3s ease, transform .25s ease;
+    background:rgba(255,255,255,.5);border:1px solid rgba(90,51,120,.15);border-radius:18px;
+    padding:.6rem .3rem .8rem;display:flex;flex-direction:column;align-items:center;cursor:pointer;
+    -webkit-user-select:none;user-select:none;transition:background .3s ease, transform .25s ease;
+    perspective:400px;
   }
   .tulip-plot:active{transform:scale(.94);}
-  .tulip-plot.bloomed{background:rgba(201,168,224,.28);}
-  .tulip-svg{width:56px;height:70px;transition:transform .5s cubic-bezier(.2,1.4,.4,1);}
-  .tulip-plot:not(.bloomed) .tulip-svg{transform:translateY(6px) scale(.82);opacity:.55;filter:grayscale(.4);}
-  .tulip-plot.bloomed .tulip-svg{transform:translateY(0) scale(1);opacity:1;filter:none;animation:sway 3.6s ease-in-out infinite;}
-  @keyframes sway{0%,100%{transform:rotate(-2.5deg);}50%{transform:rotate(2.5deg);}}
-  .plot-label{font-size:.72rem;color:var(--ink-soft);margin-top:.25rem;letter-spacing:.01em;}
-  .garden-msg{
-    min-height:64px;max-width:420px;width:100%;
-    font-family:'Cormorant Garamond',serif;font-style:italic;
-    color:var(--plum);font-size:1.15rem;line-height:1.6;
-    padding:.4rem 1rem;
-  }
-  .garden-continue{
-    margin-top:1.4rem;
-    opacity:0;pointer-events:none;
-    transition:opacity .6s ease;
-  }
-  .garden-continue.ready{opacity:1;pointer-events:auto;}
-  .ghost-btn{
-    appearance:none;border:1px solid var(--shadow-tulip);background:transparent;
-    color:var(--plum);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;
-    padding:.75rem 2.1rem;border-radius:999px;cursor:pointer;
-    transition:background .35s ease,color .35s ease;
-  }
-  .ghost-btn:hover{background:var(--shadow-tulip);color:#fff;}
+  .tulip-plot.bloomed{background:rgba(201,168,224,.3);}
+  .tulip-svg{width:52px;height:66px;transition:transform .6s cubic-bezier(.2,1.4,.4,1);transform-style:preserve-3d;}
+  .tulip-plot:not(.bloomed) .tulip-svg{transform:translateY(8px) scale(.75) rotateX(35deg);opacity:.5;filter:grayscale(.45);}
+  .tulip-plot.bloomed .tulip-svg{transform:translateY(0) scale(1) rotateX(0);opacity:1;filter:none;animation:sway3d 3.8s ease-in-out infinite;}
+  @keyframes sway3d{0%,100%{transform:rotateZ(-3deg) rotateY(-6deg);}50%{transform:rotateZ(3deg) rotateY(6deg);}}
+  @keyframes tulipFloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-9px) rotate(3deg);}}
+  .plot-label{font-size:.68rem;color:var(--ink-soft);margin-top:.2rem;}
+  .garden-msg{min-height:70px;max-width:420px;width:100%;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--plum);font-size:1.1rem;line-height:1.6;padding:.3rem 1rem;}
+  .continue-wrap{margin-top:1.1rem;opacity:0;pointer-events:none;transition:opacity .6s ease;}
+  .continue-wrap.ready{opacity:1;pointer-events:auto;}
 
-  /* ---------- NIKKAH / PLEDGE ---------- */
-  #pledge{background:linear-gradient(180deg,var(--lilac-pale),#efe1f7);}
-  .pledge-card{
-    position:relative;
-    max-width:420px;width:100%;
-    background:var(--paper);
-    border:1.5px solid var(--gold);
-    border-radius:6px;
-    padding:2.3rem 1.6rem 2rem;
-    box-shadow:0 18px 40px -18px rgba(90,51,120,.5);
-  }
-  .pledge-card::before,.pledge-card::after{
-    content:"";position:absolute;inset:8px;
-    border:1px solid var(--gold-soft);border-radius:3px;pointer-events:none;
-  }
-  .pledge-kicker{
-    font-size:.78rem;letter-spacing:.14em;color:var(--shadow-tulip);
-    text-transform:uppercase;margin:0 0 .3rem;font-weight:500;
-  }
-  .pledge-title{font-size:1.5rem;color:var(--ink-soft);margin:0 0 1.4rem;font-style:italic;font-family:'Cormorant Garamond',serif;}
-  .pledge-names{
-    display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.4rem;
-  }
-  .pledge-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,7vw,2.1rem);color:var(--plum);font-weight:600;}
-  .pledge-amp{color:var(--gold);font-size:1.4rem;}
-  .pledge-line{
-    font-size:.92rem;color:var(--ink-soft);line-height:1.9;font-weight:300;margin:0 0 .3rem;
-  }
-  .seal{
-    width:52px;height:52px;border-radius:50%;
-    background:radial-gradient(circle at 35% 30%,var(--gold-soft),var(--gold) 70%);
-    display:flex;align-items:center;justify-content:center;
-    margin:1.5rem auto 0;
-    box-shadow:0 6px 16px -6px rgba(180,140,50,.6);
-  }
-  .seal svg{width:24px;height:24px;fill:var(--paper);}
-  .pledge-date{margin-top:1rem;font-size:.8rem;color:var(--ink-soft);letter-spacing:.05em;}
+  /* floating field for cover/closing */
+  .tulip-field{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;}
+  .field-tulip{position:absolute;bottom:-4%;animation:fieldSway ease-in-out infinite;transform-origin:bottom center;}
+  @keyframes fieldSway{0%,100%{transform:rotate(-4deg) translateY(0);}50%{transform:rotate(4deg) translateY(-6px);}}
 
-  /* ---------- PROPOSAL ---------- */
-  #proposal{
-    background:radial-gradient(ellipse at 50% 20%,#5a3378,transparent 60%),linear-gradient(180deg,var(--night-mid),var(--night-deep));
-    min-height:100svh;
-  }
+  /* =============== PLEDGE =============== */
+  .pledge-card{position:relative;max-width:430px;width:100%;background:var(--paper);border:1.5px solid var(--gold);border-radius:8px;padding:2.2rem 1.5rem 2rem;box-shadow:0 22px 46px -18px rgba(90,51,120,.55);}
+  .pledge-card::before{content:"";position:absolute;inset:8px;border:1px solid var(--gold-soft);border-radius:4px;pointer-events:none;}
+  .pledge-kicker{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;color:var(--shadow-tulip);margin:0 0 .3rem;}
+  .pledge-title{font-size:1.4rem;color:var(--ink-soft);margin:0 0 1.3rem;font-style:italic;font-family:'Cormorant Garamond',serif;}
+  .pledge-names{display:flex;align-items:center;justify-content:center;gap:.9rem;margin-bottom:1.3rem;}
+  .pledge-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.45rem,7vw,2rem);color:var(--plum);font-weight:600;}
+  .pledge-amp{color:var(--gold);font-size:1.3rem;}
+  .pledge-line{font-size:.9rem;color:var(--ink-soft);line-height:1.85;font-weight:300;margin:0 0 .7rem;text-align:left;}
+  .seal{width:50px;height:50px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--gold-soft),var(--gold) 70%);display:flex;align-items:center;justify-content:center;margin:1.2rem auto 0;box-shadow:0 6px 16px -6px rgba(180,140,50,.6);}
+  .seal svg{width:22px;height:22px;fill:var(--paper);}
+
+  /* =============== PROPOSAL =============== */
   #fireworks-canvas{position:absolute;inset:0;z-index:1;pointer-events:none;}
-  .proposal-inner{position:relative;z-index:3;max-width:480px;width:100%;}
-  .q-title{
-    font-size:clamp(2.1rem,8vw,3.3rem);color:var(--paper);margin:0 0 1.6rem;font-weight:500;
-  }
+  .bouquet{display:flex;justify-content:center;align-items:flex-end;gap:2px;margin-bottom:1rem;perspective:700px;}
+  .bouquet svg{width:30px;transition:transform .3s ease;}
+  .bouquet svg:nth-child(1){transform:rotate(-16deg) translateY(6px);animation:bqSway 4.2s ease-in-out infinite;}
+  .bouquet svg:nth-child(2){transform:rotate(-7deg) translateY(1px);animation:bqSway 3.6s ease-in-out infinite .2s;}
+  .bouquet svg:nth-child(3){transform:scale(1.15);animation:bqSway 4s ease-in-out infinite .1s;}
+  .bouquet svg:nth-child(4){transform:rotate(7deg) translateY(1px);animation:bqSway 3.8s ease-in-out infinite .3s;}
+  .bouquet svg:nth-child(5){transform:rotate(16deg) translateY(6px);animation:bqSway 4.4s ease-in-out infinite .15s;}
+  @keyframes bqSway{0%,100%{filter:none;}50%{filter:brightness(1.06);}}
+  .q-title{font-size:clamp(2rem,8vw,3.1rem);color:var(--paper);margin:0 0 1.4rem;font-weight:500;}
   .q-title em{color:var(--gold-soft);font-style:italic;}
-  .btn-row{
-    position:relative;
-    display:flex;gap:1.4rem;align-items:center;justify-content:center;
-    min-height:80px;
-  }
-  .yes-btn,.no-btn{
-    font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;
-    padding:.9rem 2.1rem;border-radius:999px;cursor:pointer;border:none;
-  }
-  .yes-btn{background:var(--gold-soft);color:var(--night-deep);box-shadow:0 10px 26px -10px rgba(230,190,120,.7);}
-  .no-btn{
-    background:transparent;border:1px solid var(--lilac-soft);color:var(--lilac-soft);
-    position:relative;transition:transform .18s ease;
-  }
-  .proposal-result{
-    margin-top:1.6rem;min-height:1.6rem;
-    color:var(--gold-soft);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;
-  }
+  .q-sub{color:var(--lilac-soft);font-size:.95rem;max-width:34ch;margin:0 auto 1.6rem;font-weight:300;line-height:1.7;}
+  .btn-row{position:relative;display:flex;gap:1.3rem;align-items:center;justify-content:center;min-height:80px;flex-wrap:wrap;}
+  .no-btn{position:relative;transition:transform .18s ease;}
+  .proposal-result{margin-top:1.5rem;min-height:1.6rem;color:var(--gold-soft);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.12rem;}
 
-  /* ---------- LETTER ---------- */
-  #letter{background:linear-gradient(180deg,var(--night-deep),#1a0e28);}
-  .letter-card{
-    max-width:520px;width:100%;
-    background:var(--paper);
-    border-radius:10px;
-    padding:2.4rem 1.7rem 2.2rem;
-    text-align:left;
-    box-shadow:0 30px 60px -20px rgba(0,0,0,.55);
-  }
-  .letter-to{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--plum);margin:0 0 1rem;font-style:italic;}
-  .letter-body p{
-    font-size:.98rem;line-height:1.9;color:var(--ink);font-weight:300;margin:0 0 1rem;
-  }
-  .letter-urdu{
-    font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--shadow-tulip);
-    font-size:1.05rem;line-height:1.8;
-  }
-  .letter-sign{
-    margin-top:1.4rem;font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--plum);font-style:italic;
-  }
-  .final-tulips{display:flex;justify-content:center;gap:.6rem;margin-top:2.2rem;}
-  .final-tulips svg{width:34px;height:44px;}
+  /* =============== LETTER =============== */
+  .letter-card{max-width:520px;width:100%;background:var(--paper);border-radius:12px;padding:2.2rem 1.6rem 2rem;text-align:left;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);}
+  .letter-to{font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:var(--plum);margin:0 0 1rem;font-style:italic;}
+  .letter-body p{font-size:.96rem;line-height:1.9;color:var(--ink);font-weight:300;margin:0 0 1rem;}
+  .letter-urdu{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--shadow-tulip);font-size:1.02rem;line-height:1.8;}
+  .letter-sign{margin-top:1.3rem;font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--plum);font-style:italic;}
 
-  footer{
-    background:#1a0e28;color:var(--ink-soft);
-    text-align:center;padding:1.6rem 1rem calc(env(safe-area-inset-bottom,0px) + 1.6rem);
-    font-size:.78rem;letter-spacing:.03em;min-height:auto;
-  }
+  /* =============== CLOSING =============== */
+  .closing-mark{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.6rem;color:var(--gold-soft);margin-top:1.5rem;}
 
   @media (min-width:640px){
     .garden-grid{max-width:520px;}
+    .cards-grid{grid-template-columns:repeat(4,1fr);max-width:640px;}
   }
 </style>
 </head>
 <body>
 
-<!-- ============ HERO ============ -->
-<section id="hero">
-  <div class="stars" id="stars"></div>
-  <div class="petal-field" id="petals-hero"></div>
-  <div class="hero-inner">
-    <p class="kicker-names serif">Israr &amp; Tahira</p>
-    <h1 class="hero-title serif">All of you,<br><em>and forever ahead.</em></h1>
-    <p class="hero-sub">A small garden I grew for you, jaan &mdash; one tulip, one memory, one question at the end.</p>
-    <button class="enter-btn" id="enterBtn">Open it, meri jaan</button>
-  </div>
-  <div class="scroll-hint"></div>
-</section>
+<div id="globalPetals"></div>
 
-<!-- ============ OUR STORY ============ -->
-<section id="story" class="paper-section">
-  <svg class="eyebrow-mark reveal" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.2 2.2 4 6.4 4c2.2 0 3.9 1.2 5.6 3.4C13.7 5.2 15.4 4 17.6 4 21.8 4 23.7 8.2 22 11.7 19.5 16.4 12 21 12 21z" fill="#9868c2"/></svg>
-  <h2 class="section-title reveal">Our little <em>timeline</em></h2>
-  <p class="lede reveal">More than a year now, Tahira. Somewhere between the arguments we didn't mean and the laughter we couldn't stop, you became the person I plan my life around.</p>
-  <div class="timeline reveal">
-    <div class="t-row"><span class="t-dot"></span><p><strong>The beginning &mdash;</strong> two strangers who somehow already knew each other's silences.</p></div>
-    <div class="t-row"><span class="t-dot"></span><p><strong>The small fights &mdash;</strong> we've debated, gone quiet, and come back anyway, every single time, because leaving was never actually an option.</p></div>
-    <div class="t-row"><span class="t-dot"></span><p><strong>The everyday &mdash;</strong> ordinary calls and small updates that somehow became the best part of my day.</p></div>
-    <div class="t-row"><span class="t-dot"></span><p><strong>Right now &mdash;</strong> one year in, still choosing you, still certain.</p></div>
-  </div>
-</section>
+<div id="app">
+  <div id="book">
 
-<!-- ============ TULIP GARDEN ============ -->
-<section id="garden">
-  <svg class="eyebrow-mark reveal" viewBox="0 0 24 24" fill="none"><path d="M12 2c2 3 2 6 0 9-2-3-2-6 0-9z" fill="#c9a8e0"/><path d="M4 21c2-5 5-8 8-9 3 1 6 4 8 9" stroke="#9868c2" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
-  <h2 class="section-title reveal">Your <em>tulip garden</em></h2>
-  <p class="lede reveal">You told me once you love light purple tulips. So I planted five &mdash; tap each one to let it bloom.</p>
-  <div class="garden-grid reveal" id="gardenGrid"></div>
-  <p class="garden-msg" id="gardenMsg">&nbsp;</p>
-  <div class="garden-continue" id="gardenContinue">
-    <button class="ghost-btn" id="toPledge">The garden is full &mdash; keep going</button>
-  </div>
-</section>
-
-<!-- ============ NIKKAH / PLEDGE PAGE ============ -->
-<section id="pledge">
-  <div class="pledge-card reveal">
-    <p class="pledge-kicker">A promise, written down</p>
-    <p class="pledge-title">InshaAllah, our forever begins</p>
-    <div class="pledge-names">
-      <span class="pledge-name">Israr</span>
-      <span class="pledge-amp">&amp;</span>
-      <span class="pledge-name">Tahira</span>
+    <!-- 0 COVER -->
+    <div class="page night" id="p0">
+      <div class="stars"></div>
+      <div class="tulip-field" id="coverField"></div>
+      <div class="cover-3d">
+        <div class="cover-bouquet" id="coverBouquet"></div>
+        <p class="kicker-names">Israr &amp; Tahira</p>
+        <h1 class="hero-title">All of you,<br><em>and forever ahead.</em></h1>
+        <p class="hero-sub">A little storybook I made for you, jaan &mdash; turn the pages: our story, a silly quiz, a garden, a promise, and a question at the very end.</p>
+        <button class="btn" id="enterBtn">Turn the first page</button>
+      </div>
     </div>
-    <p class="pledge-line">I promise to keep you happy, to fight fair and forgive faster, and to build every wish we've spoken about &mdash; together, one by one.</p>
-    <p class="pledge-line">Meri jaan, meri dulhan banogi &mdash; jab main tumhein bohot sara pyaar dunga. Hum apni saari khwahishen saath poori karenge, InshaAllah.</p>
-    <div class="seal"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.2 2.2 4 6.4 4c2.2 0 3.9 1.2 5.6 3.4C13.7 5.2 15.4 4 17.6 4 21.8 4 23.7 8.2 22 11.7 19.5 16.4 12 21 12 21z"/></svg></div>
-    <p class="pledge-date">One question left to ask &darr;</p>
-  </div>
-</section>
 
-<!-- ============ PROPOSAL ============ -->
-<section id="proposal">
-  <canvas id="fireworks-canvas"></canvas>
-  <div class="petal-field" id="petals-proposal"></div>
-  <div class="proposal-inner">
-    <h2 class="q-title serif">Will you <em>marry me</em>?</h2>
-    <div class="btn-row" id="btnRow">
-      <button class="yes-btn" id="yesBtn">Yes, always</button>
-      <button class="no-btn" id="noBtn">Not yet</button>
+    <!-- 1 STORY -->
+    <div class="page paper" id="p1">
+      <p class="page-label">Chapter one</p>
+      <h2 class="page-heading">Where we <em>began</em></h2>
+      <p class="lede">More than a year now, Tahira. Somewhere between the arguments we didn't mean and the laughter we couldn't stop, you quietly became the person I plan my whole life around.</p>
+      <div class="timeline">
+        <div class="t-row"><span class="t-dot"></span><p><strong>The beginning &mdash;</strong> two people who somehow already knew each other's silences, and never needed to explain the small things.</p></div>
+        <div class="t-row"><span class="t-dot"></span><p><strong>The small fights &mdash;</strong> we've debated, gone quiet, sulked a little, and come back anyway &mdash; every single time &mdash; because leaving was never actually on the table.</p></div>
+        <div class="t-row"><span class="t-dot"></span><p><strong>The everyday &mdash;</strong> ordinary calls, forwarded reels, and "did you eat yet" messages that somehow became the best part of my day.</p></div>
+        <div class="t-row"><span class="t-dot"></span><p><strong>The hard days &mdash;</strong> the ones where you were upset with me and I felt it in my chest for hours &mdash; and I learned, slowly, how to be gentler.</p></div>
+        <div class="t-row"><span class="t-dot"></span><p><strong>The good days &mdash;</strong> which, honestly, were most of them &mdash; you, me, and a whole world that felt lighter because we were in it together.</p></div>
+        <div class="t-row"><span class="t-dot"></span><p><strong>Right now &mdash;</strong> one year and more in, still choosing you, still certain, still yours.</p></div>
+      </div>
+      <button class="btn btn-plum" id="toQuiz" style="margin-top:2rem;">Next &mdash; a silly little quiz</button>
     </div>
-    <p class="proposal-result" id="proposalResult">&nbsp;</p>
-  </div>
-</section>
 
-<!-- ============ FINAL LETTER ============ -->
-<section id="letter">
-  <div class="letter-card reveal">
-    <p class="letter-to">To my Tahira,</p>
-    <div class="letter-body">
-      <p>You are the whole world I somehow get to hold in one pair of hands. Every little thing &mdash; a message, a laugh, a five-minute call &mdash; still feels like the best part of my day.</p>
-      <p>When you're upset with me, something in my chest goes quiet, and I carry it longer than I let on. So here's my promise, plainly: I will keep choosing you, keep showing up softer after every disagreement, and never let a fight matter more than us.</p>
-      <p class="letter-urdu">Tahira, tum hamesha meri ho, aur Israr hamesha tumhara.<br>I love you, and I don't want a single second without you.</p>
-      <p>Take care of yourself the way you take care of everyone else. And &mdash; take care of me too, jaan. That's all I'm asking for, along with forever.</p>
+    <!-- 2 QUIZ -->
+    <div class="page paper" id="p2">
+      <p class="page-label">Chapter two</p>
+      <h2 class="page-heading">A quiz, just <em>for fun</em></h2>
+      <p class="lede" style="margin-bottom:.6rem;">Guess how I feel &mdash; there's no wrong answer, jaan, only sweeter ones.</p>
+      <div class="quiz-card" id="quizCard"></div>
     </div>
-    <p class="letter-sign">Always yours,<br>Israr</p>
-    <div class="final-tulips" id="finalTulips"></div>
-  </div>
-</section>
 
-<footer>made with a whole heart, for Tahira &middot; Israr</footer>
+    <!-- 3 REASONS -->
+    <div class="page paper" id="p3">
+      <p class="page-label">Chapter three</p>
+      <h2 class="page-heading">Reasons, <em>tap to open</em></h2>
+      <p class="lede">Eight of the hundred things. Tap a tulip to read one.</p>
+      <div class="cards-grid" id="cardsGrid"></div>
+    </div>
+
+    <!-- 4 GARDEN -->
+    <div class="page paper" id="p4">
+      <p class="page-label">Chapter four</p>
+      <h2 class="page-heading">Your <em>tulip garden</em></h2>
+      <p class="lede">You told me once you love light purple tulips. So I planted six &mdash; tap each one to let it bloom.</p>
+      <div class="garden-grid" id="gardenGrid"></div>
+      <p class="garden-msg" id="gardenMsg">&nbsp;</p>
+      <div class="continue-wrap" id="gardenContinue"><button class="btn btn-plum" id="toPledge">The garden is full &mdash; keep going</button></div>
+    </div>
+
+    <!-- 5 PLEDGE -->
+    <div class="page paper" id="p5">
+      <p class="page-label">Chapter five</p>
+      <h2 class="page-heading">A <em>promise</em>, written down</h2>
+      <div class="pledge-card">
+        <p class="pledge-kicker">A pledge, before I ask you properly</p>
+        <p class="pledge-title">InshaAllah, our forever begins</p>
+        <div class="pledge-names"><span class="pledge-name">Israr</span><span class="pledge-amp">&amp;</span><span class="pledge-name">Tahira</span></div>
+        <p class="pledge-line">I promise to keep you happy on the ordinary days, not only the good ones. To fight fair, forgive faster, and never let a disagreement outweigh us.</p>
+        <p class="pledge-line">I promise to build every wish we've whispered about, one by one, together &mdash; the small ones and the big ones.</p>
+        <p class="pledge-line" style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--shadow-tulip);">Meri jaan, meri dulhan banogi &mdash; jab main tumhein bohot saara pyaar dunga. Hum apni saari khwahishen saath poori karenge, InshaAllah.</p>
+        <div class="seal"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.3 8.2 2.2 4 6.4 4c2.2 0 3.9 1.2 5.6 3.4C13.7 5.2 15.4 4 17.6 4 21.8 4 23.7 8.2 22 11.7 19.5 16.4 12 21 12 21z"/></svg></div>
+      </div>
+      <button class="btn btn-plum" id="toProposal" style="margin-top:1.8rem;">One question left &darr;</button>
+    </div>
+
+    <!-- 6 PROPOSAL -->
+    <div class="page night" id="p6">
+      <canvas id="fireworks-canvas"></canvas>
+      <div class="tulip-field" id="proposalField"></div>
+      <div class="bouquet" id="bouquet"></div>
+      <h2 class="q-title">Will you <em>marry me</em>?</h2>
+      <p class="q-sub">Every fight, every reel, every quiet Tuesday &mdash; led here. Meri jaan, my whole world, my forever.</p>
+      <div class="btn-row" id="btnRow">
+        <button class="btn btn-solid yes-btn" id="yesBtn">Yes, always</button>
+        <button class="btn no-btn" id="noBtn">Not yet</button>
+      </div>
+      <p class="proposal-result" id="proposalResult">&nbsp;</p>
+    </div>
+
+    <!-- 7 LETTER -->
+    <div class="page night" id="p7">
+      <div class="letter-card">
+        <p class="letter-to">To my Tahira,</p>
+        <div class="letter-body">
+          <p>You are the whole world I somehow get to hold in one pair of hands. Every little thing &mdash; a message, a laugh, a five-minute call between chores &mdash; still feels like the best part of my day, even after a year of it.</p>
+          <p>When you're upset with me, something in my chest goes quiet, and I carry it longer than I let on. When I'm the one who's low, I go too far inward, and I know that's not fair to you either. So here's my promise, plainly: I will keep choosing you, keep showing up softer after every disagreement, and never let a fight matter more than us.</p>
+          <p>I want to complete every wish we've ever spoken about &mdash; the small ones like a lazy Sunday with no phones, and the big one, InshaAllah, of a home that's fully ours.</p>
+          <p class="letter-urdu">Tahira, tum hamesha meri ho, aur Israr hamesha tumhara.<br>I love you, and I don't want a single second without you.</p>
+          <p>Take care of yourself the way you take care of everyone else. And &mdash; take care of me too, jaan. That's all I'm asking for, along with forever.</p>
+        </div>
+        <p class="letter-sign">Always yours,<br>Israr</p>
+      </div>
+      <button class="btn" id="toClosing" style="margin-top:1.6rem;">One last page</button>
+    </div>
+
+    <!-- 8 CLOSING -->
+    <div class="page night" id="p8">
+      <div class="tulip-field" id="closingField"></div>
+      <h2 class="page-heading" style="color:var(--paper);">Not the end &mdash;<br><em>just the beginning</em></h2>
+      <p class="lede">Thank you for reading all the way to the last page, the way you've stayed through every ordinary day this past year. Here's to every page still unwritten.</p>
+      <p class="closing-mark">Tahira &amp; Israr, InshaAllah</p>
+      <button class="btn" id="replayBtn" style="margin-top:1.8rem;">Read it again</button>
+    </div>
+
+  </div>
+
+  <nav id="pageNav">
+    <button class="nav-arrow" id="prevArrow" aria-label="Previous page"><svg viewBox="0 0 24 24"><polyline points="15 6 9 12 15 18"/></svg></button>
+    <div id="dots"></div>
+    <button class="nav-arrow" id="nextArrow" aria-label="Next page"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
+  </nav>
+</div>
 
 <script>
 (function(){
   "use strict";
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pages = Array.from(document.querySelectorAll('.page'));
+  const dotsWrap = document.getElementById('dots');
+  const prevArrow = document.getElementById('prevArrow');
+  const nextArrow = document.getElementById('nextArrow');
+  let current = 0;
 
-  /* ---------- reveal on scroll ---------- */
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); } });
-  },{threshold:0.18});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  pages.forEach((_,i)=>{
+    const d=document.createElement('button');
+    d.className='dot'+(i===0?' on':'');
+    d.addEventListener('click',()=>goTo(i));
+    dotsWrap.appendChild(d);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function render(){
+    pages.forEach((el,i)=>{
+      el.classList.remove('is-active','is-prev','is-next');
+      if(i===current) el.classList.add('is-active');
+      else if(i<current) el.classList.add('is-prev');
+      else el.classList.add('is-next');
+    });
+    dots.forEach((d,i)=>d.classList.toggle('on', i===current));
+    prevArrow.disabled = current===0;
+    nextArrow.disabled = current===pages.length-1;
+    if(current===0) pages[0].scrollTop = 0;
+  }
+  function goTo(i){
+    current = Math.max(0, Math.min(pages.length-1, i));
+    render();
+  }
+  prevArrow.addEventListener('click',()=>goTo(current-1));
+  nextArrow.addEventListener('click',()=>goTo(current+1));
+  window.addEventListener('keydown', e=>{
+    if(e.key==='ArrowRight') goTo(current+1);
+    if(e.key==='ArrowLeft') goTo(current-1);
+  });
+
+  /* swipe */
+  let touchX=null, touchY=null;
+  document.getElementById('book').addEventListener('touchstart', e=>{
+    touchX = e.touches[0].clientX; touchY = e.touches[0].clientY;
+  },{passive:true});
+  document.getElementById('book').addEventListener('touchend', e=>{
+    if(touchX===null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    const dy = e.changedTouches[0].clientY - touchY;
+    if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)*1.4){
+      if(dx < 0) goTo(current+1); else goTo(current-1);
+    }
+    touchX=null; touchY=null;
+  },{passive:true});
+
+  render();
+
+  /* simple button wiring between chapters */
+  document.getElementById('enterBtn').addEventListener('click',()=>goTo(1));
+  document.getElementById('toQuiz').addEventListener('click',()=>goTo(2));
+  document.getElementById('toPledge').addEventListener('click',()=>goTo(5));
+  document.getElementById('toProposal').addEventListener('click',()=>goTo(6));
+  document.getElementById('toClosing').addEventListener('click',()=>goTo(8));
+  document.getElementById('replayBtn').addEventListener('click',()=>goTo(0));
 
   /* ---------- stars ---------- */
-  const starsWrap = document.getElementById('stars');
-  for(let i=0;i<60;i++){
-    const s=document.createElement('div');
-    s.className='star';
-    s.style.left=Math.random()*100+'%';
-    s.style.top=Math.random()*70+'%';
-    s.style.animationDelay=(Math.random()*3)+'s';
-    s.style.width=s.style.height=(Math.random()*1.6+1)+'px';
-    starsWrap.appendChild(s);
-  }
+  ['p0'].forEach(id=>{
+    const wrap = document.querySelector('#'+id+' .stars');
+    if(!wrap) return;
+    for(let i=0;i<55;i++){
+      const s=document.createElement('div');
+      s.className='star';
+      s.style.left=Math.random()*100+'%';
+      s.style.top=Math.random()*70+'%';
+      s.style.animationDelay=(Math.random()*3)+'s';
+      s.style.width=s.style.height=(Math.random()*1.6+1)+'px';
+      wrap.appendChild(s);
+    }
+  });
 
-  /* ---------- petal generator ---------- */
+  /* ---------- global falling petals ---------- */
   function spawnPetals(container, count){
     if(reduced) return;
     for(let i=0;i<count;i++){
@@ -425,20 +459,19 @@
       p.className='petal';
       p.style.left=Math.random()*100+'%';
       p.style.setProperty('--drift',(Math.random()*80-40)+'px');
-      p.style.animationDuration=(7+Math.random()*8)+'s';
-      p.style.animationDelay=(Math.random()*10)+'s';
-      p.style.opacity=(0.5+Math.random()*0.4);
-      const scale=0.6+Math.random()*0.8;
-      p.style.transform=`scale(${scale})`;
+      p.style.animationDuration=(9+Math.random()*10)+'s';
+      p.style.animationDelay=(Math.random()*14)+'s';
+      p.style.opacity=(0.4+Math.random()*0.4);
+      p.style.transform=`scale(${0.6+Math.random()*0.7})`;
       container.appendChild(p);
     }
   }
-  spawnPetals(document.getElementById('petals-hero'),16);
-  spawnPetals(document.getElementById('petals-proposal'),14);
+  spawnPetals(document.getElementById('globalPetals'), 20);
 
   /* ---------- tulip svg factory ---------- */
-  function tulipSVG(){
-    return `<svg class="tulip-svg" viewBox="0 0 60 76" xmlns="http://www.w3.org/2000/svg">
+  function tulipSVG(extra){
+    extra = extra || '';
+    return `<svg class="tulip-svg ${extra}" viewBox="0 0 60 76" xmlns="http://www.w3.org/2000/svg">
       <path d="M30 70 C30 50 30 38 30 30" stroke="#5c8a4a" stroke-width="3" fill="none" stroke-linecap="round"/>
       <path d="M30 55 C22 52 16 46 14 38 C22 40 27 46 30 52 Z" fill="#6fae56"/>
       <path d="M30 58 C38 55 44 48 46 40 C38 42 33 48 30 55 Z" fill="#588f43"/>
@@ -450,12 +483,144 @@
     </svg>`;
   }
 
-  /* ---------- garden ---------- */
+  /* cover bouquet */
+  const coverBouquet = document.getElementById('coverBouquet');
+  for(let i=0;i<3;i++){ coverBouquet.insertAdjacentHTML('beforeend', tulipSVG()); }
+  Array.from(coverBouquet.children).forEach((el,i)=>{ el.style.animationDelay=(i*0.4)+'s'; });
+
+  /* proposal bouquet */
+  const bouquet = document.getElementById('bouquet');
+  for(let i=0;i<5;i++){ bouquet.insertAdjacentHTML('beforeend', tulipSVG()); }
+
+  /* floating tulip fields (cover / proposal / closing) */
+  function buildField(id, count){
+    const wrap = document.getElementById(id);
+    if(!wrap) return;
+    for(let i=0;i<count;i++){
+      const holder=document.createElement('div');
+      holder.className='field-tulip';
+      const scale = 0.5 + Math.random()*0.9;
+      holder.style.left = (Math.random()*94)+'%';
+      holder.style.width = (34*scale)+'px';
+      holder.style.opacity = 0.35 + Math.random()*0.5;
+      holder.style.animationDuration = (4+Math.random()*3)+'s';
+      holder.style.animationDelay = (Math.random()*3)+'s';
+      holder.innerHTML = tulipSVG();
+      holder.querySelector('svg').style.width='100%';
+      wrap.appendChild(holder);
+    }
+  }
+  buildField('coverField', 8);
+  buildField('proposalField', 6);
+  buildField('closingField', 9);
+
+  /* ---------- QUIZ ---------- */
+  const quizData = [
+    {q:"What do I think about most, on an ordinary weekday?",
+     opts:["Deadlines and clients","You, honestly, more than I'll admit","Cricket scores"],
+     correct:1,
+     yes:"Correct. Somewhere between meetings, you show up in my head anyway.",
+     no:"Sweet guess &mdash; but no. It's still you, every time."},
+    {q:"What's my favourite colour of tulip, these days?",
+     opts:["Red","Light purple, like the ones you love","Yellow"],
+     correct:1,
+     yes:"Exactly. You made me love a colour I never used to notice.",
+     no:"Close, but it's the light purple ones &mdash; because they're yours."},
+    {q:"When we fight, what do I actually want?",
+     opts:["To win the argument","To make up and hold you again","Complete silence"],
+     correct:1,
+     yes:"Yes. Being right has never once felt as good as being okay with you again.",
+     no:"Not quite &mdash; truth is, I just want us okay again, as fast as possible."},
+    {q:"In one word, what are you to me?",
+     opts:["A friend","Everything","A roommate"],
+     correct:1,
+     yes:"That's the one. Everything &mdash; plainly, completely.",
+     no:"Try again in your heart: it's everything. You're everything."},
+    {q:"What happens on the next page?",
+     opts:["Nothing much","A question I've been carrying for a while","We stay just as we are"],
+     correct:1,
+     yes:"...you'll see soon enough. Keep going.",
+     no:"You'll find out very shortly &mdash; keep turning the pages."}
+  ];
+  let quizIndex = 0;
+  const quizCard = document.getElementById('quizCard');
+  function renderQuiz(){
+    if(quizIndex >= quizData.length){
+      quizCard.innerHTML = `
+        <div class="quiz-final">
+          <p class="quiz-q">You know us better than you think.</p>
+          <p class="lede" style="margin:0 auto 1.4rem;">Every answer was sweet, jaan &mdash; there was never a wrong one. Onward?</p>
+          <button class="btn btn-plum" id="quizDone">Next chapter &mdash; reasons I love you</button>
+        </div>`;
+      document.getElementById('quizDone').addEventListener('click',()=>goTo(3));
+      return;
+    }
+    const item = quizData[quizIndex];
+    quizCard.innerHTML = `
+      <p class="quiz-progress">Question ${quizIndex+1} of ${quizData.length}</p>
+      <p class="quiz-q">${item.q}</p>
+      <div class="quiz-opts">
+        ${item.opts.map((o,i)=>`<button class="quiz-opt" data-i="${i}">${o}</button>`).join('')}
+      </div>
+      <p class="quiz-feedback" id="quizFeedback">&nbsp;</p>
+      <div class="quiz-next" id="quizNextWrap"><button class="btn btn-plum" id="quizNext">Next question</button></div>
+    `;
+    const opts = Array.from(quizCard.querySelectorAll('.quiz-opt'));
+    const feedback = document.getElementById('quizFeedback');
+    const nextWrap = document.getElementById('quizNextWrap');
+    opts.forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        if(btn.disabled) return;
+        opts.forEach(b=>b.disabled=true);
+        const i = Number(btn.dataset.i);
+        if(i === item.correct){
+          btn.classList.add('correct');
+          feedback.innerHTML = item.yes;
+        }else{
+          btn.classList.add('wrong');
+          opts[item.correct].classList.add('correct');
+          feedback.innerHTML = item.no;
+        }
+        nextWrap.classList.add('show');
+      });
+    });
+    document.getElementById('quizNext').addEventListener('click',()=>{
+      quizIndex++;
+      renderQuiz();
+    });
+  }
+  renderQuiz();
+
+  /* ---------- REASONS flip cards ---------- */
+  const reasons = [
+    "The way you say my name when you're only half awake.",
+    "How you remember tiny details I mentioned only once, weeks ago.",
+    "Your laugh, which has fixed more bad days than I can count.",
+    "The way you stand your ground, gently but firmly, when it matters.",
+    "That you keep choosing me, on our best days and our worst ones.",
+    "How you make an ordinary Tuesday feel like it mattered.",
+    "That being near you feels like the only place I want to be.",
+    "That loving you is the easiest, surest thing I've ever done."
+  ];
+  const cardsGrid = document.getElementById('cardsGrid');
+  reasons.forEach((r,i)=>{
+    const card=document.createElement('div');
+    card.className='flip-card';
+    card.innerHTML = `<div class="flip-inner">
+        <div class="flip-face flip-front">${tulipSVG()}<span>Reason ${i+1}</span></div>
+        <div class="flip-face flip-back"><p>${r}</p></div>
+      </div>`;
+    card.addEventListener('click',()=>card.classList.toggle('flipped'));
+    cardsGrid.appendChild(card);
+  });
+
+  /* ---------- GARDEN ---------- */
   const meanings = [
-    "For the day we first met &mdash; light purple, like something new and enchanting.",
+    "For the day we first met &mdash; light purple, like something new and a little enchanting.",
     "For every small fight we chose to end with 'us' still standing.",
-    "For every quiet call and every 'I just wanted to hear your voice.'",
+    "For every quiet call, and every 'I just wanted to hear your voice.'",
     "For the whole year that somehow went by too fast.",
+    "For the version of me that's calmer, kinder, because of you.",
     "For everything still ahead of us, InshaAllah."
   ];
   const grid = document.getElementById('gardenGrid');
@@ -467,135 +632,86 @@
     plot.className='tulip-plot';
     plot.innerHTML = tulipSVG() + `<span class="plot-label">Tulip ${i+1}</span>`;
     plot.addEventListener('click',()=>{
-      if(!plot.classList.contains('bloomed')){
-        plot.classList.add('bloomed');
-        bloomed++;
-      }
+      if(!plot.classList.contains('bloomed')){ plot.classList.add('bloomed'); bloomed++; }
       gardenMsg.innerHTML = m;
-      if(bloomed >= meanings.length){
-        gardenContinue.classList.add('ready');
-      }
+      if(bloomed >= meanings.length) gardenContinue.classList.add('ready');
     });
     grid.appendChild(plot);
   });
 
-  document.getElementById('toPledge').addEventListener('click',()=>{
-    document.getElementById('pledge').scrollIntoView({behavior: reduced ? 'auto':'smooth'});
-  });
-
-  /* final tulips row */
-  const finalTulips = document.getElementById('finalTulips');
-  for(let i=0;i<5;i++){ finalTulips.insertAdjacentHTML('beforeend', tulipSVG()); }
-
-  document.getElementById('enterBtn').addEventListener('click',()=>{
-    document.getElementById('story').scrollIntoView({behavior: reduced ? 'auto':'smooth'});
-  });
-
-  /* ---------- proposal: dodging No button ---------- */
+  /* ---------- PROPOSAL: dodging No + fireworks ---------- */
   const btnRow = document.getElementById('btnRow');
   const noBtn = document.getElementById('noBtn');
   const yesBtn = document.getElementById('yesBtn');
   const result = document.getElementById('proposalResult');
   let dodges = 0;
-  const dodgeLines = [
-    "Try again? she says.",
-    "Nice try. Still asking.",
-    "Not that easy, jaan.",
-    "I'm patient. Still waiting.",
-    "Okay, last chance to say yes."
-  ];
+  const dodgeLines = ["Try again? she says.","Nice try. Still asking.","Not that easy, jaan.","I'm patient. Still waiting.","Okay, last chance to say yes."];
   function dodge(){
     const rowRect = btnRow.getBoundingClientRect();
     const btnRect = noBtn.getBoundingClientRect();
     const maxX = Math.max(0, rowRect.width - btnRect.width - 8);
-    const maxY = Math.max(0, 70 - btnRect.height);
+    const maxY = 60;
     const x = (Math.random()*maxX) - (rowRect.width/2 - btnRect.width/2 - 4);
     const y = (Math.random()*maxY*2) - maxY;
-    noBtn.style.position='relative';
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
     dodges = Math.min(dodges+1, dodgeLines.length-1);
     result.textContent = dodgeLines[dodges];
   }
   noBtn.addEventListener('mouseenter', dodge);
-  noBtn.addEventListener('touchstart', (e)=>{ e.preventDefault(); dodge(); }, {passive:false});
-  noBtn.addEventListener('click', (e)=>{ e.preventDefault(); dodge(); });
+  noBtn.addEventListener('touchstart', e=>{ e.preventDefault(); dodge(); }, {passive:false});
+  noBtn.addEventListener('click', e=>{ e.preventDefault(); dodge(); });
 
   yesBtn.addEventListener('click', ()=>{
     result.textContent = "She said yes. \u2014 InshaAllah, forever starts now.";
     btnRow.style.pointerEvents='none';
-    yesBtn.style.opacity = '1';
-    noBtn.style.opacity = '0';
+    noBtn.style.opacity='0';
     launchFireworks();
-    setTimeout(()=>{
-      document.getElementById('letter').scrollIntoView({behavior: reduced ? 'auto':'smooth'});
-    }, 2200);
+    setTimeout(()=>goTo(7), 2200);
   });
 
-  /* ---------- fireworks ---------- */
   const canvas = document.getElementById('fireworks-canvas');
   const ctx = canvas.getContext('2d');
   let particles = [];
-  let fwRunning = false;
   function resizeCanvas(){
-    const sec = document.getElementById('proposal');
+    const sec = document.getElementById('p6');
     canvas.width = sec.clientWidth;
     canvas.height = sec.clientHeight;
   }
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
-
   const fwColors = ['#e3c27a','#c9a8e0','#f4ecfa','#e3b7c9','#b28ecf'];
   function burst(x,y){
-    const count = reduced ? 0 : 42;
+    if(reduced) return;
+    const count = 42;
     for(let i=0;i<count;i++){
       const angle = (Math.PI*2*i)/count;
       const speed = 1.6 + Math.random()*2.6;
-      particles.push({
-        x,y,
-        vx: Math.cos(angle)*speed,
-        vy: Math.sin(angle)*speed,
-        life: 60+Math.random()*20,
-        age:0,
-        color: fwColors[Math.floor(Math.random()*fwColors.length)],
-        size: 1.6+Math.random()*1.8
-      });
+      particles.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:60+Math.random()*20,age:0,color:fwColors[Math.floor(Math.random()*fwColors.length)],size:1.6+Math.random()*1.8});
     }
   }
+  let fwRunning=false;
   function tick(){
     if(!fwRunning) return;
     ctx.clearRect(0,0,canvas.width,canvas.height);
     particles.forEach(p=>{
-      p.age++;
-      p.x += p.vx;
-      p.y += p.vy;
-      p.vy += 0.035;
-      p.vx *= 0.985;
-      const alpha = Math.max(0, 1 - p.age/p.life);
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle = p.color;
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-      ctx.fill();
+      p.age++; p.x+=p.vx; p.y+=p.vy; p.vy+=0.035; p.vx*=0.985;
+      ctx.globalAlpha = Math.max(0,1-p.age/p.life);
+      ctx.fillStyle=p.color; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill();
     });
-    ctx.globalAlpha = 1;
-    particles = particles.filter(p=>p.age < p.life);
+    ctx.globalAlpha=1;
+    particles = particles.filter(p=>p.age<p.life);
+    if(particles.length===0 && !fwSpawning){ fwRunning=false; return; }
     requestAnimationFrame(tick);
   }
-  let burstCount = 0;
-  let fwInterval;
+  let fwSpawning=false, burstCount=0;
   function launchFireworks(){
-    if(reduced){ return; }
-    resizeCanvas();
-    fwRunning = true;
-    tick();
-    fwInterval = setInterval(()=>{
-      burst(canvas.width*(0.25+Math.random()*0.5), canvas.height*(0.25+Math.random()*0.35));
+    if(reduced) return;
+    resizeCanvas(); fwRunning=true; fwSpawning=true; tick();
+    const fwInterval = setInterval(()=>{
+      burst(canvas.width*(0.25+Math.random()*0.5), canvas.height*(0.22+Math.random()*0.32));
       burstCount++;
-      if(burstCount>7){
-        clearInterval(fwInterval);
-        setTimeout(()=>{ fwRunning = particles.length>0 ? fwRunning : false; }, 1500);
-      }
-    }, 420);
+      if(burstCount>7){ clearInterval(fwInterval); fwSpawning=false; }
+    },420);
   }
 })();
 </script>
