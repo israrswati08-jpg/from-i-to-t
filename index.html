@@ -118,6 +118,56 @@ p{line-height:1.7}
 .tulip-info{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px}
 .meaning{padding:8px 12px;border-radius:999px;background:#ffffffb8;color:#4a2c61;font-size:.78rem}
 
+
+/* refined love pages */
+.word-cloud-wrap,.words-page,.beauty-page,.garden-heading{width:min(760px,100%);text-align:center;z-index:3}
+.intro-line{font-size:1.25rem;max-width:620px;margin:12px auto 22px;color:#684b7d}
+.word-cloud{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:22px auto 25px;max-width:680px}
+.word-cloud span{padding:12px 18px;border-radius:999px;background:rgba(255,255,255,.78);border:1px solid rgba(160,120,190,.18);box-shadow:0 10px 25px rgba(90,55,120,.08);font-family:"Cormorant Garamond";font-size:1.2rem;animation:wordFloat 4s ease-in-out infinite}
+.word-cloud span:nth-child(2n){animation-delay:-1.2s}.word-cloud span:nth-child(3n){animation-delay:-2.2s}
+@keyframes wordFloat{50%{transform:translateY(-7px) rotate(.5deg);box-shadow:0 18px 30px rgba(90,55,120,.13)}}
+.soft-note{font-family:"Cormorant Garamond";font-size:1.3rem;color:#75558a;margin:12px auto 24px;max-width:650px}
+.garden-page{background:radial-gradient(circle at 50% 25%,#3d255f 0,#171027 62%,#0d0916 100%)}
+.garden-heading h2{margin:8px 0 8px;text-shadow:0 0 24px rgba(224,184,255,.28)}
+.garden-heading p{opacity:.86;font-size:1.2rem}
+.garden-hint{z-index:3;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;opacity:.72;margin:-8px 0 12px}
+.garden .tulip{cursor:pointer;filter:drop-shadow(0 8px 12px rgba(0,0,0,.18));transition:filter .25s}
+.garden .tulip:hover{filter:drop-shadow(0 0 16px rgba(255,210,247,.85))}
+.garden .tulip .bloom{transition:transform .25s,filter .25s}
+.garden .tulip:active .bloom{transform:scale(1.14);filter:brightness(1.18)}
+.firefly{position:absolute;width:5px;height:5px;border-radius:50%;background:#fff4a8;box-shadow:0 0 14px #fff1a0;animation:firefly 3s ease-in-out infinite;z-index:4}
+.firefly.f1{left:16%;top:35%}.firefly.f2{right:18%;top:45%;animation-delay:-1.2s}.firefly.f3{left:70%;top:25%;animation-delay:-2s}
+@keyframes firefly{50%{transform:translateY(-22px) translateX(14px);opacity:.35}100%{opacity:1}}
+.memory-words{display:grid;gap:14px;margin:24px 0;max-width:690px}
+.memory-word{display:flex;gap:15px;align-items:flex-start;text-align:left;padding:17px 18px;border-radius:22px;background:#ffffffb8;border:1px solid #fff;box-shadow:0 12px 30px rgba(75,40,100,.08);animation:softRise 5s ease-in-out infinite}
+.memory-word:nth-child(2){animation-delay:-1s}.memory-word:nth-child(3){animation-delay:-2s}.memory-word:nth-child(4){animation-delay:-3s}
+.memory-word>span{width:42px;height:42px;border-radius:14px;background:#ead9ff;display:grid;place-items:center;color:#7b4ec1;font-size:1.2rem;flex:none}
+.memory-word strong{font:600 1.45rem "Cormorant Garamond";color:#38204f}.memory-word p{margin-top:2px;color:#684b7d}
+@keyframes softRise{50%{transform:translateY(-4px)}}
+.beauty-page{text-align:center;position:relative}
+.beauty-intro{max-width:640px;margin:15px auto 20px;font-size:1.35rem;color:#654b76}
+.orbit{width:min(420px,82vw);aspect-ratio:1;margin:18px auto;position:relative;animation:orbitSpin 18s linear infinite}
+@keyframes orbitSpin{to{transform:rotate(360deg)}}
+.orbit span{position:absolute;left:50%;top:50%;transform:rotate(calc(var(--i)*60deg)) translateY(-165px) rotate(calc(var(--i)*-60deg));padding:10px 15px;border-radius:999px;background:#fff;color:#6a4c7b;box-shadow:0 10px 25px rgba(80,45,110,.1);font-family:"Cormorant Garamond";font-size:1.15rem;animation:counterSpin 18s linear infinite}
+@keyframes counterSpin{to{transform:rotate(calc(var(--i)*60deg + -360deg)) translateY(-165px) rotate(calc(var(--i)*-60deg + 360deg))}}
+.center-heart{position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);font:5rem "Great Vibes";color:#b16be3;text-shadow:0 0 28px #e5baff;animation:heartPulse 2.4s ease-in-out infinite}
+@keyframes heartPulse{50%{transform:translate(-50%,-52%) scale(1.12)}}
+@media(max-width:600px){
+  .word-cloud{gap:8px}.word-cloud span{font-size:1.05rem;padding:9px 13px}
+  .garden{min-height:330px}.garden .tulip{transform:scale(.78);transform-origin:bottom}
+  .garden .tulip:nth-child(3n){display:none}
+  .memory-word{padding:14px}.memory-word strong{font-size:1.3rem}
+  .orbit{width:310px}.orbit span{transform:rotate(calc(var(--i)*60deg)) translateY(-120px) rotate(calc(var(--i)*-60deg));font-size:1rem;padding:8px 11px}
+  @keyframes counterSpin{to{transform:rotate(calc(var(--i)*60deg + -360deg)) translateY(-120px) rotate(calc(var(--i)*-60deg + 360deg))}}
+}
+.tulip-pop{position:fixed;inset:0;background:rgba(9,5,18,.62);backdrop-filter:blur(8px);display:grid;place-items:center;z-index:10000;opacity:0;pointer-events:none;transition:.3s}
+.tulip-pop.show{opacity:1;pointer-events:auto}
+.tulip-box{width:min(430px,88vw);padding:30px 24px;border-radius:28px;background:linear-gradient(145deg,#fff9fd,#ead9ff);color:#3c2452;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.35);transform:translateY(18px) scale(.96);transition:.3s}
+.tulip-pop.show .tulip-box{transform:translateY(0) scale(1)}
+.tulip-icon{font-size:3.2rem;filter:drop-shadow(0 0 15px #e1a5ff);margin-bottom:8px}
+.tulip-box h3{font-size:2rem;margin-bottom:10px}.tulip-box p{font-family:"Cormorant Garamond";font-size:1.5rem;line-height:1.35}
+.tulip-close{margin-top:18px}
+
 /* proposal */
 .proposal{text-align:center;z-index:3}
 .ring{width:170px;height:170px;margin:20px auto;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#fff5ff,#c99aff 42%,transparent 43%);box-shadow:0 0 70px #c07aff;animation:pulse 2s infinite}
@@ -196,85 +246,97 @@ p{line-height:1.7}
   <div class="stars"></div><div class="moon"></div><div class="petals" id="petals0"></div>
   <div class="topbar"><span class="brand">T & I</span><span class="navdot">♡</span></div>
   <div class="hero-copy">
-    <div class="small eyebrow">For the girl who feels like home</div>
+    <div class="small eyebrow">A little world made for Tahira</div>
     <h1>Tahira & Israr</h1>
-    <p class="serif" style="font-size:1.5rem">I don't need a thousand reasons to love you. I just need one moment with you to remember why my heart chose you.</p>
-    <button class="btn pink" onclick="go(1)">Come closer, my love ♡</button>
-    <div class="scroll">a little journey for you</div>
+    <p class="serif" style="font-size:1.5rem">A little place filled with beautiful words, soft colors, flowers, memories, and all the love I carry for you.</p>
+    <button class="btn pink" onclick="go(1)">Open your little world ♡</button>
+    <div class="scroll">tap the buttons to continue</div>
   </div>
 </section>
 
 <section class="page light" id="p1">
   <div class="petals" id="petals1"></div>
   <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
-  <div class="card romantic-card">
-    <div class="small">If I could hold you right now</div>
-    <h2>I Wouldn't Let Go So Quickly</h2>
-    <p>I'd pull you gently into my arms, let you rest your head against my chest, and stay there with you until the whole world became quiet.</p>
-    <p>I'd kiss your forehead softly. Then your cheek. And probably smile when you tell me I'm being too sweet.</p>
-    <div class="quote">“Somewhere between your smile and your voice, my heart found its favorite place.”</div>
-    <button class="btn pink" onclick="go(2)">Stay with me a little longer →</button>
+  <div class="word-cloud-wrap">
+    <div class="small">A few words for you</div>
+    <h2>Beautiful, Just As You Are</h2>
+    <p class="serif intro-line">Some feelings don't need a long speech. Sometimes a few beautiful words say enough.</p>
+    <div class="word-cloud">
+      <span>Beautiful</span><span>Precious</span><span>Kind</span><span>Graceful</span>
+      <span>Wonderful</span><span>Rare</span><span>Lovely</span><span>Magical</span>
+      <span>Brilliant</span><span>Adored</span><span>Special</span><span>Unforgettable</span>
+    </div>
+    <div class="soft-note">And somehow, every beautiful word still feels too small for you. ♡</div>
+    <button class="btn pink" onclick="go(2)">Walk into the garden →</button>
   </div>
 </section>
 
-<section class="page" id="p2">
+<section class="page garden-page" id="p2">
   <div class="stars"></div><div class="petals" id="petals2"></div>
   <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
-  <div class="romance-wrap">
-    <div class="small">Things I want to give you</div>
-    <h2>A Love That Feels Safe</h2>
-    <div class="love-grid">
-      <div class="love-card"><span>♡</span><h3>Warm hugs</h3><p>The kind where you forget what you were worried about.</p></div>
-      <div class="love-card"><span>✦</span><h3>Soft kisses</h3><p>Forehead kisses, cheek kisses, and kisses just because I missed you.</p></div>
-      <div class="love-card"><span>☾</span><h3>Late nights</h3><p>Quiet conversations, sleepy smiles, and “don't hang up yet.”</p></div>
-      <div class="love-card"><span>∞</span><h3>My presence</h3><p>On easy days, hard days, and every ordinary day between them.</p></div>
-    </div>
-    <button class="btn pink" onclick="go(3)">Let me tell you what you mean to me →</button>
+  <div class="garden-heading">
+    <div class="small">A garden made just for you</div>
+    <h2>Our Little Tulip Garden</h2>
+    <p class="serif">Tap any tulip. Each flower is holding one little thought for you.</p>
   </div>
+  <div class="garden" id="garden">
+    <div class="firefly f1"></div><div class="firefly f2"></div><div class="firefly f3"></div>
+    <div class="ground"></div>
+  </div>
+  <div class="garden-hint">♡ tap a tulip to open its little message ♡</div>
+  <button class="btn pink" onclick="go(3)">Keep going →</button>
 </section>
 
 <section class="page light" id="p3">
   <div class="petals" id="petals3"></div>
   <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
-  <div class="card letter-card">
-    <div class="small">A little truth from my heart</div>
-    <h2>You Are More Than Someone I Love</h2>
-    <p>You're the person I want to tell everything to — the silly things, the beautiful things, the things that keep me awake at night.</p>
-    <p>You're the smile I want to see after a long day. The hand I want to hold when we're walking. The shoulder I want to lean on when words aren't enough.</p>
-    <p>And when I imagine the future, I don't imagine perfection. I imagine <strong>us</strong>: laughing in the kitchen, teasing each other, making up after little arguments, sharing quiet mornings, and finding new reasons to fall in love again.</p>
-    <div class="quote">“I don't want just the beautiful moments. I want all of them — with you.”</div>
-    <button class="btn pink" onclick="go(4)">One more secret from my heart →</button>
+  <div class="words-page">
+    <div class="small">Little reminders</div>
+    <h2>Words I Hope You Remember</h2>
+    <div class="memory-words">
+      <div class="memory-word"><span>✦</span><div><strong>You are precious.</strong><p>Your presence makes ordinary moments feel special.</p></div></div>
+      <div class="memory-word"><span>♡</span><div><strong>You are deeply appreciated.</strong><p>For your smile, your kindness, your patience, and your beautiful heart.</p></div></div>
+      <div class="memory-word"><span>☾</span><div><strong>You deserve beautiful days.</strong><p>Days filled with peace, laughter, warmth, and reasons to smile.</p></div></div>
+      <div class="memory-word"><span>∞</span><div><strong>You are unforgettable.</strong><p>There are some people the heart simply remembers.</p></div></div>
+    </div>
+    <button class="btn pink" onclick="go(4)">One special page remains →</button>
   </div>
 </section>
 
-<section class="page" id="p4">
+<section class="page romance-page" id="p4">
   <div class="stars"></div><div class="petals" id="petals4"></div>
   <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
   <div class="romance-wrap intimate">
-    <div class="small">If you were beside me tonight</div>
+    <div class="small">This is the one page for romance</div>
     <h2>I'd Just Hold You</h2>
     <p class="serif intimate-text">No big speech. No perfect words.</p>
     <p class="serif intimate-text">Just my arms around you, your head on my shoulder, my fingers gently holding yours, and a soft kiss on your forehead before I whisper...</p>
     <div class="whisper">“I'm so grateful you're mine to love.”</div>
     <div class="floating-hearts">♡ &nbsp; ♡ &nbsp; ♡</div>
-    <button class="btn pink" onclick="go(5)">Come a little closer →</button>
+    <button class="btn pink" onclick="go(5)">A little more love →</button>
   </div>
 </section>
 
 <section class="page light" id="p5">
   <div class="petals" id="petals5"></div>
   <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
-  <div class="card proposal-card">
-    <div class="small">The promise I want to make</div>
-    <div class="ring"><span>♡</span></div>
-    <h2>Let Me Keep Choosing You</h2>
-    <p>I want to be the person who makes you feel loved, wanted, respected, protected, and never alone.</p>
-    <p>I want to hold your hand through the ordinary days and pull you close on the days when the world feels heavy.</p>
-    <p class="serif" style="font-size:1.45rem">If you let me, I'll keep giving you reasons to smile.</p>
-    <button class="btn pink" onclick="sayYes()">Yes, keep me close ♡</button>
+  <div class="beauty-page">
+    <div class="small">Before the letters</div>
+    <h2>You Make Life More Beautiful</h2>
+    <p class="serif beauty-intro">Not because every day is perfect, but because beautiful things become easier to notice when someone special is part of your world.</p>
+    <div class="orbit">
+      <span style="--i:0">peace</span>
+      <span style="--i:1">smiles</span>
+      <span style="--i:2">kindness</span>
+      <span style="--i:3">laughter</span>
+      <span style="--i:4">dreams</span>
+      <span style="--i:5">hope</span>
+    </div>
+    <div class="center-heart">♡</div>
+    <p class="soft-note">Keep these little words with you: <strong>peace · joy · hope · warmth · beautiful days</strong></p>
+    <button class="btn pink" onclick="sayYes()">Continue to the letters →</button>
   </div>
 </section>
-
 
 <section class="page light" id="p6">
   <div class="petals" id="petals6"></div>
@@ -351,10 +413,64 @@ p{line-height:1.7}
   </div>
 </section>
 
+
+<div class="tulip-pop" id="tulipPop" onclick="closeTulip(event)">
+  <div class="tulip-box">
+    <div class="tulip-icon" id="tulipIcon">🌷</div>
+    <h3 id="tulipTitle">A little thought for you</h3>
+    <p id="tulipMessage"></p>
+    <button class="btn pink tulip-close" onclick="closeTulip()">Close ♡</button>
+  </div>
+</div>
+
 <div class="progress" id="progress"></div>
 </div>
 
 <script>
+
+
+const tulipMessages = [
+  ["🌷","You are my happiness.","Your smile has a beautiful way of making an ordinary moment feel brighter."],
+  ["🌷","You are my peace.","Some people feel like a quiet place where the heart can simply breathe."],
+  ["🌷","You are my reason to smile.","There are little moments that become brighter simply because they remind me of you."],
+  ["🌷","You are precious to me.","Not for one perfect reason, but for all the little things that make you who you are."],
+  ["🌷","You make my world softer.","Your kindness, your presence, and your beautiful heart make life feel warmer."],
+  ["🌷","You are one of my favorite thoughts.","A simple thought of you can turn a quiet moment into a beautiful one."],
+  ["🌷","You deserve beautiful days.","May your days always carry peace, laughter, hope, and countless reasons to smile."],
+  ["🌷","You are wonderfully rare.","There is something about you that cannot be copied, replaced, or forgotten."],
+  ["🌷","You are deeply appreciated.","For every smile, every kind word, every little moment, and simply for being you."],
+  ["🌷","You are a beautiful part of my story.","Some chapters become special because of the person written into them."],
+  ["🌷","You bring light with you.","Even a small light can change the feeling of an entire room."],
+  ["🌷","You are worth celebrating.","Today, tomorrow, and in all the ordinary little moments in between."]
+];
+
+function buildTulipGarden(){
+  const garden=document.getElementById('garden');
+  if(!garden) return;
+  tulipMessages.forEach((m,i)=>{
+    const t=document.createElement('div');
+    t.className='tulip';
+    t.style.left=(7 + (i%6)*15 + (Math.floor(i/6)%2)*5) + '%';
+    t.style.bottom=(72 + (i%3)*7) + 'px';
+    t.style.animationDelay=(-i*.24)+'s';
+    t.innerHTML='<div class="bloom"></div><div class="stem"></div><div class="leaf l"></div><div class="leaf r"></div>';
+    t.addEventListener('click',()=>openTulip(i));
+    garden.appendChild(t);
+  });
+}
+function openTulip(i){
+  const [icon,title,msg]=tulipMessages[i];
+  document.getElementById('tulipIcon').textContent=icon;
+  document.getElementById('tulipTitle').textContent=title;
+  document.getElementById('tulipMessage').textContent=msg;
+  document.getElementById('tulipPop').classList.add('show');
+}
+function closeTulip(e){
+  if(!e || e.target.id==='tulipPop' || e.currentTarget?.id==='tulipPop' || e.target.closest?.('.tulip-close')){
+    document.getElementById('tulipPop').classList.remove('show');
+  }
+}
+buildTulipGarden();
 
 // Navigation is button-only. Mobile swipes/scrolling never change pages.
 document.addEventListener('touchstart', e => {
