@@ -275,8 +275,67 @@ p{line-height:1.7}
   </div>
 </section>
 
-<section class="page" id="p6">
-  <div class="stars"></div><div class="fireworks" id="fireworks"></div><div class="petals" id="petals6"></div>
+
+<section class="page light" id="p6">
+  <div class="petals" id="petals6"></div>
+  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
+  <article class="letter nikah-letter">
+    <div class="small" style="text-align:center">A letter for the day I pray for</div>
+    <h2>Our Nikah, InshaAllah ♡</h2>
+    <p>My love,</p>
+    <p>When I think about the day our names are joined in nikah, I don't imagine a perfect movie scene. I imagine something much more beautiful — two hearts standing before Allah, grateful that He brought them to each other.</p>
+    <p>I pray that our nikah is the beginning of a home filled with sakinah, mercy, laughter, patience and countless little moments that only we understand.</p>
+    <p>I want to be the husband who reaches for your hand when you're tired, who makes you laugh when you're quiet, who hugs you when words aren't enough, and who never becomes too busy to remind you how loved you are.</p>
+    <p>I pray we keep choosing kindness after disagreements, forgiveness after mistakes, and each other through every chapter Allah writes for us.</p>
+    <p>And on the days when life is difficult, I want you to remember this: you will never have to face those days feeling alone. I want to stand beside you, make dua with you, build with you, and come home to you.</p>
+    <div class="quote">“May Allah make our love a source of peace, and our home a place where two hearts always feel safe.”</div>
+    <p>Until that beautiful day, I will keep praying for us.</p>
+    <div class="signature">Always yours, Israr ♡</div>
+  </article>
+  <button class="btn pink" style="margin-top:25px;z-index:3" onclick="go(7)">Read the letter I wrote for you →</button>
+</section>
+
+<section class="page light" id="p7">
+  <div class="petals" id="petals7"></div>
+  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
+  <article class="letter">
+    <div class="small" style="text-align:center">A letter I hope you keep</div>
+    <h2>For Tahira, My Beautiful Soul</h2>
+    <p>My love,</p>
+    <p>There are feelings so deep that ordinary sentences feel too small for them. Still, I want to try, because you deserve to know how precious you are to me.</p>
+    <p>You have become one of the gentlest parts of my world. Your voice can turn a difficult day quiet. Your smile can make a simple moment feel special. Even the smallest things we share have found a permanent little corner inside my heart.</p>
+    <p>I don't promise a life without misunderstandings. I promise something more real: that when the clouds arrive, I will choose conversation over silence, understanding over pride, forgiveness over keeping score, and us over the argument.</p>
+    <p>I want to see your dreams become real. I want to celebrate your wins, protect your peace, make you laugh when the day is heavy, and stand beside you when life asks us to be brave.</p>
+    <p>InshaAllah, if life opens that beautiful door for us, I want our future to be full of dua, family, travel, late-night conversations, a home filled with warmth, and countless ordinary mornings that become precious simply because you are there.</p>
+    <p>You are my favorite person to tell things to. My safe place. My happiness in the small moments. My beautiful purple tulip in a garden I never knew my heart was waiting for.</p>
+    <p>And if I ever fail to say it enough: <strong>I choose you with a full heart.</strong></p>
+    <p>Always yours, always cheering for you, always grateful that our paths crossed.</p>
+    <div class="signature">Israr ♡</div>
+  </article>
+  <button class="btn pink" style="margin-top:25px;z-index:3" onclick="go(8)">One last love letter →</button>
+</section>
+
+<section class="page" id="p8">
+  <div class="stars"></div><div class="petals" id="petals8"></div>
+  <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
+  <article class="letter" style="background:linear-gradient(145deg,#211035,#32164f);color:#fff;border-color:#ffffff22">
+    <div class="small" style="text-align:center">My last words on this little journey</div>
+    <h2>Before You Close This</h2>
+    <p>There is one thing I never want you to forget.</p>
+    <p>You are loved. Not only when you're smiling. Not only when everything is easy. You are loved on your tired days, your quiet days, your complicated days and your beautiful days.</p>
+    <p>If I could be beside you right now, I'd pull you into the longest hug, kiss your forehead, hold your hand, and tell you softly that I am grateful for you.</p>
+    <p>I want the kind of love where we can laugh until our stomachs hurt, fall asleep while talking, steal little kisses, make up after silly arguments, pray for each other, and still look at each other years later with that same little spark.</p>
+    <p>I don't want a love that only sounds beautiful in words. I want a love that feels beautiful in real life.</p>
+    <p>So if you ever wonder what my heart wants, the answer is simple:</p>
+    <div class="quote" style="color:#ffd0ed">“It wants you. Your hand. Your smile. Your hugs. Your heart. And, InshaAllah, a lifetime of us.”</div>
+    <p>Come here, my love. Let me hold you a little longer.</p>
+    <div class="signature">With all my heart,<br>Israr ♡</div>
+  </article>
+  <button class="btn pink" style="margin-top:25px;z-index:3" onclick="go(9)">Keep our little forever →</button>
+</section>
+
+<section class="page" id="p9">
+  <div class="stars"></div><div class="fireworks" id="fireworks"></div><div class="petals" id="petals9"></div>
   <button class="page-back btn outline" onclick="go(current-1)">← Previous</button>
   <div class="celebrate">
     <div class="big-heart">♡</div>
@@ -332,7 +391,7 @@ function go(n){
     current=n;
     [...progress.children].forEach((d,i)=>d.classList.toggle('on',i===n));
     window.scrollTo({top:0,behavior:'instant'});
-    if(n===6) launchFireworks();
+    if(n===9) launchFireworks();
     setTimeout(()=>{changing=false},420);
   },360);
 }
